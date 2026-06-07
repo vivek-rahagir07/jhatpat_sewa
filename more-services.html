@@ -99,7 +99,7 @@
                     </div>
                     <div class="form-group">
                         <label for="service-type">Service Category</label>
-                        <select id="service-type" class="form-control">
+                        <select id="service-type" class="form-control" onchange="showServiceDocs(this.value)">
                             <option value="courier">Courier & Parcel</option>
                             <option value="ticket">Ticket Booking</option>
                             <option value="insurance">Insurance Premium</option>
@@ -107,9 +107,21 @@
                             <option value="other" selected>Completely Custom Request</option>
                         </select>
                     </div>
+
+                    <!-- Dynamic Required Documents Checklist -->
+                    <div id="service-doc-checklist" style="background: #f5f0ff; border-radius: 12px; padding: 20px 25px; border-left: 5px solid #9333ea; display: none;">
+                        <h4 style="margin: 0 0 12px; color: #1f303e; font-size: 16px;"><i class="fas fa-clipboard-list" style="margin-right: 8px; color: #9333ea;"></i>Required Information / Documents</h4>
+                        <ul id="service-doc-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: #444;"></ul>
+                    </div>
+
                     <div class="form-group">
                         <label for="requirements">Detailed Requirements</label>
                         <textarea id="requirements" class="form-control" placeholder="Describe exactly what you need help with..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="documents">Upload Supporting Documents (optional)</label>
+                        <input type="file" id="documents" class="form-control" style="background: white; padding: 10px 15px;" multiple>
+                        <small style="color: #666; font-size: 13px; margin-top: 5px;">Attach any relevant documents, photos, or receipts.</small>
                     </div>
                     <button type="submit" class="btn btn-primary" style="background: #9333ea; border: none; font-size: 18px; padding: 15px; width: 100%;">Submit Custom Request</button>
                 </form>
@@ -120,5 +132,45 @@
         <p>&copy; 2026 Jhatpat Sewa | Fast - Easy - Reliable Service</p>
     </footer>
     <script src="script.js"></script>
+    <script>
+        const serviceDocs = {
+            'courier': [
+                'Sender & Receiver name and address',
+                'Package dimensions and weight (approx.)',
+                'Contents description (for fragile items)'
+            ],
+            'ticket': [
+                'Travel date and preferred time',
+                'Source and destination city',
+                'Number of passengers & ID proof (Aadhaar / PAN)',
+                'Class preference (Sleeper, AC, Bus type)'
+            ],
+            'insurance': [
+                'Policy number',
+                'Insurance company name',
+                'Premium amount and due date',
+                'Policyholder ID proof'
+            ],
+            'repair': [
+                'Type of repair (Electrical, Plumbing, Carpentry)',
+                'Photo of the issue (optional but helpful)',
+                'Preferred date and time for visit',
+                'Full address with landmark'
+            ],
+            'other': []
+        };
+
+        function showServiceDocs(val) {
+            const box = document.getElementById('service-doc-checklist');
+            const list = document.getElementById('service-doc-list');
+            const items = serviceDocs[val] || [];
+            if (items.length === 0) {
+                box.style.display = 'none';
+                return;
+            }
+            list.innerHTML = items.map(d => '<li><i class="fas fa-check-circle" style="color:#9333ea; margin-right:8px;"></i>' + d + '</li>').join('');
+            box.style.display = 'block';
+        }
+    </script>
 </body>
 </html>

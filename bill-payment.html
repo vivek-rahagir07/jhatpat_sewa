@@ -104,7 +104,7 @@
                     </div>
                     <div class="form-group">
                         <label for="service-type">Biller Category</label>
-                        <select id="service-type" class="form-control">
+                        <select id="service-type" class="form-control" onchange="showBillDocs(this.value)">
                             <option value="electricity">Electricity</option>
                             <option value="mobile">Mobile Recharge / Postpaid</option>
                             <option value="dth">DTH Subscription</option>
@@ -112,9 +112,21 @@
                             <option value="other" selected>Other Biller</option>
                         </select>
                     </div>
+
+                    <!-- Dynamic Required Info Checklist -->
+                    <div id="bill-doc-checklist" style="background: #fef9e7; border-radius: 12px; padding: 20px 25px; border-left: 5px solid #f59e0b; display: none;">
+                        <h4 style="margin: 0 0 12px; color: #1f303e; font-size: 16px;"><i class="fas fa-clipboard-list" style="margin-right: 8px; color: #f59e0b;"></i>Required Information</h4>
+                        <ul id="bill-doc-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: #444;"></ul>
+                    </div>
+
                     <div class="form-group">
                         <label for="requirements">Biller Name & Consumer ID</label>
                         <textarea id="requirements" class="form-control" placeholder="E.g. BESCOM Electricity, Consumer ID: 123456789..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="bill-copy">Upload Previous Bill Copy (optional)</label>
+                        <input type="file" id="bill-copy" class="form-control" style="background: white; padding: 10px 15px;" multiple>
+                        <small style="color: #666; font-size: 13px; margin-top: 5px;">Upload a photo or scan of your previous bill for faster processing.</small>
                     </div>
                     <button type="submit" class="btn btn-primary" style="background: #f59e0b; border: none; font-size: 18px; padding: 15px; width: 100%;">Submit Bill Details</button>
                 </form>
@@ -125,5 +137,42 @@
         <p>&copy; 2026 Jhatpat Sewa | Fast - Easy - Reliable Service</p>
     </footer>
     <script src="script.js"></script>
+    <script>
+        const billDocs = {
+            'electricity': [
+                'Consumer Number / Account ID',
+                'Previous bill copy (for reference)',
+                'Registered mobile number'
+            ],
+            'mobile': [
+                'Mobile number to recharge',
+                'Operator name (Jio, Airtel, Vi, BSNL)',
+                'Plan amount or plan name'
+            ],
+            'dth': [
+                'Subscriber ID / Smart Card Number',
+                'DTH Operator (Tata Sky, Airtel, Dish TV)',
+                'Recharge amount'
+            ],
+            'water-gas': [
+                'Consumer ID / Connection Number',
+                'Municipality / Board name',
+                'Previous bill copy (optional)'
+            ],
+            'other': []
+        };
+
+        function showBillDocs(val) {
+            const box = document.getElementById('bill-doc-checklist');
+            const list = document.getElementById('bill-doc-list');
+            const items = billDocs[val] || [];
+            if (items.length === 0) {
+                box.style.display = 'none';
+                return;
+            }
+            list.innerHTML = items.map(d => '<li><i class="fas fa-check-circle" style="color:#f59e0b; margin-right:8px;"></i>' + d + '</li>').join('');
+            box.style.display = 'block';
+        }
+    </script>
 </body>
 </html>

@@ -7,11 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .service-page { padding: 100px 20px; text-align: center; }
-        .service-details { max-width: 800px; margin: 0 auto; background: white; padding: 50px; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.08); }
-        .service-icon { font-size: 60px; color: #007bff; margin-bottom: 20px; }
-    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -35,145 +30,116 @@
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="login.html" class="login-btn">Login</a></li>
             </ul>
+            <div class="hamburger"><i class="fas fa-bars"></i></div>
         </div>
     </nav>
-    <div class="main-bg">
-        <div class="service-header fade-in">
-            <h2>Cyber Cafe Services</h2>
-            <div class="divider" style="margin: 0 auto 20px;"></div>
-            <p>Get all your essential online documentation, form filling, and printing services done quickly and securely without stepping out of your house.</p>
+
+    <div class="main-bg app-page">
+        <div class="app-sticky-header theme-blue">
+            <div class="app-delivery-row">
+                <span class="app-delivery-badge"><i class="fas fa-laptop"></i> Cyber Cafe Services</span>
+                <button class="app-location-btn"><i class="fas fa-map-marker-alt"></i> Doorstep Pickup Available</button>
+            </div>
+            <div class="app-search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder='Search "PAN card", "printing"...' autocomplete="off">
+            </div>
         </div>
 
-        <section class="service-feature-grid fade-in">
-            <div class="feature-card">
-                <div class="icon-wrapper"><i class="fas fa-id-card"></i></div>
-                <h3>PAN & Aadhaar Services</h3>
-                <p>Apply for a new PAN card, update your Aadhaar details, or download e-copies instantly.</p>
-                <div class="price-tag">From ₹150</div>
-                <a href="#custom-form" class="btn btn-primary">Book Now</a>
+        <div class="app-stats-bar fade-in">
+            <div class="app-stat">
+                <strong class="stat-icon" style="--stat-color:#1a96fc;"><i class="fas fa-users"></i> 2,500+</strong>
+                <span>Happy Customers</span>
             </div>
-            <div class="feature-card">
-                <div class="icon-wrapper"><i class="fas fa-file-alt"></i></div>
-                <h3>Online Form Filling</h3>
-                <p>Expert assistance for filling out government job applications, university admissions, and scholarship forms.</p>
-                <div class="price-tag">From ₹50</div>
-                <a href="#custom-form" class="btn btn-primary">Book Now</a>
+            <div class="app-stat">
+                <strong class="stat-icon" style="--stat-color:#f59e0b;"><i class="fas fa-star"></i> 4.8</strong>
+                <span>Average Rating</span>
             </div>
-            <div class="feature-card">
-                <div class="icon-wrapper"><i class="fas fa-print"></i></div>
-                <h3>Printouts & Scanning</h3>
-                <p>High-quality color/B&W printing and secure scanning. Free doorstep delivery for bulk orders.</p>
-                <div class="price-tag">₹5 / Page</div>
-                <a href="index.html#contact" class="btn btn-primary">Book Now</a>
+            <div class="app-stat">
+                <strong class="stat-icon" style="--stat-color:#059669;"><i class="fas fa-bolt"></i> Same Day</strong>
+                <span>Most Services</span>
             </div>
-            <div class="feature-card">
-                <div class="icon-wrapper"><i class="fas fa-passport"></i></div>
-                <h3>Passport Application</h3>
-                <p>Complete guidance and application processing for new passports or renewals.</p>
-                <div class="price-tag">From ₹300</div>
-                <a href="#custom-form" class="btn btn-primary">Book Now</a>
-            </div>
-            <div class="feature-card">
-                <div class="icon-wrapper"><i class="fas fa-plus"></i></div>
-                <h3>Other Online Service</h3>
-                <p>Need something else? Describe your requirement and we will help you out.</p>
-                <div class="price-tag">Custom</div>
-                <a href="#custom-form" class="btn btn-primary">Tell Us</a>
-            </div>
-        </section>
+        </div>
 
-        <section id="custom-form" class="custom-form-section fade-in">
-            <div class="custom-form-container">
-                <h2>Request a Custom Service</h2>
-                <form class="custom-form" onsubmit="event.preventDefault(); alert('Request submitted successfully!');">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" class="form-control" placeholder="Vivek yadav" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" class="form-control" placeholder="+91 9996445592" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="service-type">Service Type</label>
-                        <select id="service-type" class="form-control" onchange="showDocList(this.value)">
-                            <option value="pan-aadhaar">PAN & Aadhaar Services</option>
-                            <option value="form-filling">Online Form Filling</option>
-                            <option value="printouts">Printouts & Scanning</option>
-                            <option value="passport">Passport Application</option>
-                            <option value="other" selected>Other / Custom Request</option>
-                        </select>
-                    </div>
-
-                    <!-- Dynamic Required Documents Checklist -->
-                    <div id="doc-checklist" style="background: #eef6ff; border-radius: 12px; padding: 20px 25px; border-left: 5px solid #1a96fc; display: none;">
-                        <h4 style="margin: 0 0 12px; color: #1f303e; font-size: 16px;"><i class="fas fa-clipboard-list" style="margin-right: 8px; color: #1a96fc;"></i>Required Documents</h4>
-                        <ul id="doc-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: #444;"></ul>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="requirements">Specific Requirements</label>
-                        <textarea id="requirements" class="form-control" placeholder="Mention number of copies, paper size (A4/A3/Legal), colour or B&W, and any other details..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="documents">Upload Documents / Files for Printing</label>
-                        <input type="file" id="documents" class="form-control" style="background: white; padding: 10px 15px;" multiple>
-                        <small style="color: #666; font-size: 13px; margin-top: 5px;">Attach PDFs, Word docs, or images required for printing or form filling.</small>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="font-size: 18px; padding: 15px; width: 100%;">Submit Request</button>
-                </form>
+        <div class="promo-scroll fade-in">
+            <div class="promo-card promo-blue">
+                <h4>PAN Card ₹150</h4>
+                <p>Fast processing with doorstep pickup</p>
             </div>
-        </section>
+            <div class="promo-card promo-green">
+                <h4>Free Pickup</h4>
+                <p>We collect documents from your home</p>
+            </div>
+            <div class="promo-card promo-purple">
+                <h4>Print @ ₹5</h4>
+                <p>Color & B/W with delivery</p>
+            </div>
+        </div>
+
+        <div class="app-section-title fade-in">Popular Services <small>Book in 2 taps</small></div>
+        <div class="service-app-grid fade-in" id="cyberServiceGrid"></div>
     </div>
+
+    <!-- Booking sheet -->
+    <div class="booking-sheet" id="cyberBookingSheet">
+        <div class="booking-sheet-bg" onclick="closeCyberBooking()"></div>
+        <div class="booking-sheet-content">
+            <h3 id="cyberSheetTitle">Book Service</h3>
+            <p class="sheet-sub" id="cyberSheetSub">Fill in your details</p>
+            <form class="custom-form" onsubmit="event.preventDefault(); submitCyberRequest(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" class="form-control" placeholder="Full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" class="form-control" placeholder="+91 9996445592" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Service Type</label>
+                    <select id="cyberServiceSelect" class="form-control">
+                        <option value="pan-aadhaar">PAN & Aadhaar Services</option>
+                        <option value="form-filling">Online Form Filling</option>
+                        <option value="printouts">Printouts & Scanning</option>
+                        <option value="passport">Passport Application</option>
+                        <option value="other">Other / Custom</option>
+                    </select>
+                </div>
+                <div id="cyberDocChecklist" class="doc-checklist" style="--check-color:#1a96fc; --check-bg:#eef6ff; display:none;">
+                    <h4><i class="fas fa-clipboard-list"></i> Required Documents</h4>
+                    <ul id="cyberDocList"></ul>
+                </div>
+                <div class="form-group">
+                    <label>Requirements</label>
+                    <textarea class="form-control" placeholder="Copies, paper size, specific details..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Upload Documents</label>
+                    <input type="file" class="form-control" style="background:white;padding:10px;" multiple>
+                </div>
+                <button type="submit" class="app-primary-btn theme-blue">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success -->
+    <div class="order-success-overlay" id="cyberSuccessOverlay">
+        <div class="success-check" style="background:#eff6ff;color:#1a96fc;"><i class="fas fa-check"></i></div>
+        <h2>Request Submitted!</h2>
+        <p>We'll contact you within 30 minutes</p>
+        <div class="eta-box" style="background:#eff6ff;">
+            <strong id="cyberSuccessService">Service</strong>
+            <span>Booking confirmed</span>
+        </div>
+        <button class="app-primary-btn theme-blue" onclick="closeCyberSuccess()" style="max-width:280px;">Done</button>
+    </div>
+
     <footer>
         <p>&copy; 2026 Jhatpat Sewa | Fast - Easy - Reliable Service</p>
     </footer>
     <script src="script.js"></script>
-    <script>
-        const docData = {
-            'pan-aadhaar': [
-                'Aadhaar Card (original or photocopy)',
-                'Passport-size photo (white background)',
-                'Proof of Date of Birth (10th marksheet / birth certificate)',
-                'Signature on blank white paper'
-            ],
-            'form-filling': [
-                'Educational certificates & marksheets',
-                'Caste / Income / Domicile certificate (if applicable)',
-                'Passport-size & stamp-size photos',
-                'Aadhaar & PAN card',
-                'Scanned signature on white paper'
-            ],
-            'printouts': [
-                'PDF / Word / Image files to be printed',
-                'Specify paper size: A4, A3, or Legal',
-                'Specify colour or black & white',
-                'Number of copies required'
-            ],
-            'passport': [
-                'Aadhaar Card',
-                'PAN Card',
-                'Birth Certificate or 10th Marksheet',
-                'Current Address proof (electricity bill, bank statement)',
-                'Old passport (if renewal)',
-                'Passport-size photos (white background, 2×2 inch)'
-            ],
-            'other': []
-        };
-
-        function showDocList(val) {
-            const box = document.getElementById('doc-checklist');
-            const list = document.getElementById('doc-list');
-            const items = docData[val] || [];
-            if (items.length === 0) {
-                box.style.display = 'none';
-                return;
-            }
-            list.innerHTML = items.map(d => '<li><i class="fas fa-check-circle" style="color:#1a96fc; margin-right:8px;"></i>' + d + '</li>').join('');
-            box.style.display = 'block';
-        }
-    </script>
+    <script src="cyber-cafe.js"></script>
 </body>
 </html>

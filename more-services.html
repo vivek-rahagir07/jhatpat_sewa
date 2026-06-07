@@ -7,12 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .service-page { padding: 100px 20px; text-align: center; }
-        .service-details { max-width: 800px; margin: 0 auto; background: white; padding: 50px; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.08); }
-        .service-icon { font-size: 60px; color: #6f42c1; margin-bottom: 20px; }
-        .btn-purple { background-color: #6f42c1; color: white; }
-    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -36,141 +30,107 @@
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="login.html" class="login-btn">Login</a></li>
             </ul>
+            <div class="hamburger"><i class="fas fa-bars"></i></div>
         </div>
     </nav>
-    <div class="main-bg">
-        <div class="service-header fade-in">
-            <h2>Explore More Services</h2>
-            <div class="divider" style="margin: 0 auto 20px; background: linear-gradient(90deg, #6f42c1, #9333ea);"></div>
-            <p>We are constantly expanding our offerings to make your life easier. Explore our custom delivery requests, home repair setups, and other on-demand services provided right in your area.</p>
+
+    <div class="main-bg app-page">
+        <div class="app-sticky-header theme-purple">
+            <div class="app-delivery-row">
+                <span class="app-delivery-badge"><i class="fas fa-th-large"></i> All Services</span>
+                <button class="app-location-btn"><i class="fas fa-map-marker-alt"></i> Your Area</button>
+            </div>
+            <div class="app-search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder='Search "courier", "tickets"...' autocomplete="off">
+            </div>
         </div>
 
-        <section class="service-feature-grid fade-in">
-            <div class="feature-card">
-                <div class="icon-wrapper" style="color: #9333ea; background: #f3e8ff;"><i class="fas fa-box"></i></div>
-                <h3>Courier & Parcel</h3>
-                <p>Doorstep pickup and secure delivery of your important documents and parcels across the city.</p>
-                <div class="price-tag" style="color: #9333ea;">From ₹40</div>
-                <a href="index.html#contact" class="btn btn-primary" style="background:#9333ea; border:none;">Book Pickup</a>
+        <div class="promo-scroll fade-in">
+            <div class="promo-card promo-purple">
+                <h4>8+ Services</h4>
+                <p>Everything at your doorstep</p>
             </div>
-            <div class="feature-card">
-                <div class="icon-wrapper" style="color: #9333ea; background: #f3e8ff;"><i class="fas fa-ticket-alt"></i></div>
-                <h3>Ticket Booking</h3>
-                <p>Train, bus, and flight ticket reservations made easy. Avoid the hassle of confusing portals.</p>
-                <div class="price-tag" style="color: #9333ea;">₹50 Fee</div>
-                <a href="#custom-form" class="btn btn-primary" style="background:#9333ea; border:none;">Book Tickets</a>
+            <div class="promo-card promo-blue">
+                <h4>Courier ₹40</h4>
+                <p>Same-day city delivery</p>
             </div>
-            <div class="feature-card">
-                <div class="icon-wrapper" style="color: #9333ea; background: #f3e8ff;"><i class="fas fa-shield-alt"></i></div>
-                <h3>Insurance Premium</h3>
-                <p>Pay your LIC and other health/life insurance premiums instantly without standing in queues.</p>
-                <div class="price-tag" style="color: #9333ea;">Instant Receipt</div>
-                <a href="#custom-form" class="btn btn-primary" style="background:#9333ea; border:none;">Pay Premium</a>
+            <div class="promo-card promo-green">
+                <h4>Home Repairs</h4>
+                <p>Verified local experts</p>
             </div>
-            <div class="feature-card">
-                <div class="icon-wrapper" style="color: #9333ea; background: #f3e8ff;"><i class="fas fa-tools"></i></div>
-                <h3>Home Repairs</h3>
-                <p>Book verified local electricians, plumbers, and carpenters for quick home fixes.</p>
-                <div class="price-tag" style="color: #9333ea;">Varies by Job</div>
-                <a href="#custom-form" class="btn btn-primary" style="background:#9333ea; border:none;">Find Expert</a>
-            </div>
-            <div class="feature-card">
-                <div class="icon-wrapper" style="color: #9333ea; background: #f3e8ff;"><i class="fas fa-magic"></i></div>
-                <h3>Custom Request</h3>
-                <p>Need something else entirely? Tell us what you need and we'll make it happen.</p>
-                <div class="price-tag" style="color: #9333ea;">Custom Quote</div>
-                <a href="#custom-form" class="btn btn-primary" style="background:#9333ea; border:none;">Request Now</a>
-            </div>
-        </section>
+        </div>
 
-        <section id="custom-form" class="custom-form-section fade-in">
-            <div class="custom-form-container">
-                <h2 style="color: #9333ea;">Request Custom Service</h2>
-                <form class="custom-form" onsubmit="event.preventDefault(); alert('Custom request submitted successfully!');">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" class="form-control" placeholder="Vivek yadav" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" class="form-control" placeholder="+91 9996445592" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="service-type">Service Category</label>
-                        <select id="service-type" class="form-control" onchange="showServiceDocs(this.value)">
-                            <option value="courier">Courier & Parcel</option>
-                            <option value="ticket">Ticket Booking</option>
-                            <option value="insurance">Insurance Premium</option>
-                            <option value="repair">Home Repairs</option>
-                            <option value="other" selected>Completely Custom Request</option>
-                        </select>
-                    </div>
+        <div class="app-section-title fade-in">Quick Access <small>Tap to book</small></div>
+        <div class="svc-tile-grid fade-in" id="moreTileGrid"></div>
 
-                    <!-- Dynamic Required Documents Checklist -->
-                    <div id="service-doc-checklist" style="background: #f5f0ff; border-radius: 12px; padding: 20px 25px; border-left: 5px solid #9333ea; display: none;">
-                        <h4 style="margin: 0 0 12px; color: #1f303e; font-size: 16px;"><i class="fas fa-clipboard-list" style="margin-right: 8px; color: #9333ea;"></i>Required Information / Documents</h4>
-                        <ul id="service-doc-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: #444;"></ul>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="requirements">Detailed Requirements</label>
-                        <textarea id="requirements" class="form-control" placeholder="Describe exactly what you need help with..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="documents">Upload Supporting Documents (optional)</label>
-                        <input type="file" id="documents" class="form-control" style="background: white; padding: 10px 15px;" multiple>
-                        <small style="color: #666; font-size: 13px; margin-top: 5px;">Attach any relevant documents, photos, or receipts.</small>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="background: #9333ea; border: none; font-size: 18px; padding: 15px; width: 100%;">Submit Custom Request</button>
-                </form>
-            </div>
-        </section>
+        <div class="app-section-title fade-in">All Services <small>Rated & verified</small></div>
+        <div class="service-app-grid fade-in" id="moreServiceGrid"></div>
     </div>
+
+    <!-- Booking sheet -->
+    <div class="booking-sheet" id="moreBookingSheet">
+        <div class="booking-sheet-bg" onclick="closeMoreBooking()"></div>
+        <div class="booking-sheet-content">
+            <h3 id="moreSheetTitle">Book Service</h3>
+            <p class="sheet-sub" id="moreSheetSub">We'll get back to you shortly</p>
+            <form class="custom-form" onsubmit="event.preventDefault(); submitMoreRequest(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" class="form-control" placeholder="Full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" class="form-control" placeholder="+91 9996445592" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Service</label>
+                    <select id="moreServiceSelect" class="form-control">
+                        <option value="courier">Courier & Parcel</option>
+                        <option value="ticket">Ticket Booking</option>
+                        <option value="insurance">Insurance Premium</option>
+                        <option value="repair">Home Repairs</option>
+                        <option value="laundry">Laundry & Iron</option>
+                        <option value="medicine">Medicine Delivery</option>
+                        <option value="rental">Bike / Car Rental</option>
+                        <option value="custom">Custom Request</option>
+                    </select>
+                </div>
+                <div id="moreDocChecklist" class="doc-checklist" style="--check-color:#7c3aed; --check-bg:#f5f0ff; display:none;">
+                    <h4><i class="fas fa-clipboard-list"></i> Required Information</h4>
+                    <ul id="moreDocList"></ul>
+                </div>
+                <div class="form-group">
+                    <label>Details</label>
+                    <textarea class="form-control" placeholder="Describe what you need..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Upload Files (optional)</label>
+                    <input type="file" class="form-control" style="background:white;padding:10px;" multiple>
+                </div>
+                <button type="submit" class="app-primary-btn theme-purple">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success -->
+    <div class="order-success-overlay" id="moreSuccessOverlay">
+        <div class="success-check" style="background:#f5f3ff;color:#7c3aed;"><i class="fas fa-check"></i></div>
+        <h2>Request Sent!</h2>
+        <p>Our team will call you within 30 minutes</p>
+        <div class="eta-box" style="background:#f5f3ff;">
+            <strong id="moreSuccessService">Service</strong>
+            <span>Booking received</span>
+        </div>
+        <button class="app-primary-btn theme-purple" onclick="closeMoreSuccess()" style="max-width:280px;">Done</button>
+    </div>
+
     <footer>
         <p>&copy; 2026 Jhatpat Sewa | Fast - Easy - Reliable Service</p>
     </footer>
     <script src="script.js"></script>
-    <script>
-        const serviceDocs = {
-            'courier': [
-                'Sender & Receiver name and address',
-                'Package dimensions and weight (approx.)',
-                'Contents description (for fragile items)'
-            ],
-            'ticket': [
-                'Travel date and preferred time',
-                'Source and destination city',
-                'Number of passengers & ID proof (Aadhaar / PAN)',
-                'Class preference (Sleeper, AC, Bus type)'
-            ],
-            'insurance': [
-                'Policy number',
-                'Insurance company name',
-                'Premium amount and due date',
-                'Policyholder ID proof'
-            ],
-            'repair': [
-                'Type of repair (Electrical, Plumbing, Carpentry)',
-                'Photo of the issue (optional but helpful)',
-                'Preferred date and time for visit',
-                'Full address with landmark'
-            ],
-            'other': []
-        };
-
-        function showServiceDocs(val) {
-            const box = document.getElementById('service-doc-checklist');
-            const list = document.getElementById('service-doc-list');
-            const items = serviceDocs[val] || [];
-            if (items.length === 0) {
-                box.style.display = 'none';
-                return;
-            }
-            list.innerHTML = items.map(d => '<li><i class="fas fa-check-circle" style="color:#9333ea; margin-right:8px;"></i>' + d + '</li>').join('');
-            box.style.display = 'block';
-        }
-    </script>
+    <script src="more-services.js"></script>
 </body>
 </html>

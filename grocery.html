@@ -38,16 +38,92 @@
         </div>
     </nav>
     <div class="main-bg">
-        <section class="service-page fade-in">
-            <div class="service-details">
-                <div class="service-icon"><i class="fas fa-shopping-cart"></i></div>
-                <h2>Grocery Delivery</h2>
-                <div class="divider" style="margin: 0 auto 30px; background-color: #28a745;"></div>
-                <p>Fresh vegetables, fruits, and daily household essentials delivered straight to your home within minutes. Skip the line and shop for all your grocery needs from the comfort of your home.</p>
-                <br>
-                <a href="index.html#contact" class="btn btn-secondary">Start Shopping</a>
+        <div class="service-header fade-in">
+            <h2>Grocery Delivery</h2>
+            <div class="divider" style="margin: 0 auto 20px; background: linear-gradient(90deg, #28a745, #15803d);"></div>
+            <p>Fresh vegetables, fruits, and daily household essentials delivered straight to your home within minutes. Skip the line and shop for all your grocery needs from the comfort of your home.</p>
+            
+            <div class="step-wrapper">
+                <div class="step-item"><div class="step-number" style="background:#28a745;">1</div> Browse & Select</div>
+                <div class="step-item"><div class="step-number" style="background:#28a745;">2</div> We Pack Fresh</div>
+                <div class="step-item"><div class="step-number" style="background:#28a745;">3</div> Fast Delivery</div>
+            </div>
+        </div>
+
+        <section class="service-feature-grid fade-in" style="padding-top: 10px; padding-bottom: 40px;">
+            <div class="feature-card">
+                <div class="icon-wrapper" style="color: #28a745; background: #e6f6ea;"><i class="fas fa-carrot"></i></div>
+                <h3>Fresh Vegetables</h3>
+                <p>Farm-fresh vegetables handpicked and delivered to your doorstep daily.</p>
+                <div class="price-tag" style="color: #28a745;">Market Price</div>
+                <a href="#custom-form" class="btn btn-secondary">Add to Cart</a>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrapper" style="color: #28a745; background: #e6f6ea;"><i class="fas fa-apple-alt"></i></div>
+                <h3>Seasonal Fruits</h3>
+                <p>Sweet, fresh, and perfectly ripe fruits sourced from the best local farms.</p>
+                <div class="price-tag" style="color: #28a745;">Market Price</div>
+                <a href="#custom-form" class="btn btn-secondary">Add to Cart</a>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrapper" style="color: #28a745; background: #e6f6ea;"><i class="fas fa-cheese"></i></div>
+                <h3>Dairy & Bakery</h3>
+                <p>Milk, paneer, eggs, fresh bread, and other daily essentials delivered morning and evening.</p>
+                <div class="price-tag" style="color: #28a745;">MRP</div>
+                <a href="#custom-form" class="btn btn-secondary">Add to Cart</a>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrapper" style="color: #28a745; background: #e6f6ea;"><i class="fas fa-box-open"></i></div>
+                <h3>Pantry Staples</h3>
+                <p>Rice, dal, oil, spices, and packaged goods available in all sizes.</p>
+                <div class="price-tag" style="color: #28a745;">Up to 10% Off</div>
+                <a href="#custom-form" class="btn btn-secondary">Add to Cart</a>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrapper" style="color: #28a745; background: #e6f6ea;"><i class="fas fa-list-ul"></i></div>
+                <h3>Custom Grocery List</h3>
+                <p>Have a specific list? Just type or paste it here and we'll bring it all to you.</p>
+                <div class="price-tag" style="color: #28a745;">Custom</div>
+                <a href="#custom-form" class="btn btn-secondary">Upload List</a>
             </div>
         </section>
+        
+        <section id="custom-form" class="custom-form-section fade-in">
+            <div class="custom-form-container">
+                <h2 style="color: #28a745;">Submit Custom Grocery List</h2>
+                <form class="custom-form" onsubmit="event.preventDefault(); alert('List submitted successfully!');">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="+91 98765 43210" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="service-type">Category</label>
+                        <select id="service-type" class="form-control">
+                            <option value="vegetables">Fresh Vegetables</option>
+                            <option value="fruits">Seasonal Fruits</option>
+                            <option value="dairy">Dairy & Bakery</option>
+                            <option value="pantry">Pantry Staples</option>
+                            <option value="other" selected>Custom List / Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="requirements">Your List & Requirements</label>
+                        <textarea id="requirements" class="form-control" placeholder="E.g. 1kg potatoes, 500g paneer, 2 liters whole milk..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-secondary" style="font-size: 18px; padding: 15px; width: 100%;">Submit Grocery List</button>
+                </form>
+            </div>
+        </section>
+
+        <div class="fade-in" style="text-align: center; padding-bottom: 80px; background: #f8faff;">
+            <a href="https://wa.me/919876543210" class="btn btn-secondary" style="font-size: 20px; padding: 15px 40px; border-radius: 30px; box-shadow: 0 10px 25px rgba(40,167,69,0.3);"><i class="fab fa-whatsapp" style="margin-right: 10px; font-size: 24px;"></i> Order on WhatsApp</a>
+        </div>
     </div>
     <footer>
         <p>&copy; 2026 Jhatpat Sewa | Fast - Easy - Reliable Service</p>

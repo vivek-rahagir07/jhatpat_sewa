@@ -38,14 +38,80 @@
         </div>
     </nav>
     <div class="main-bg">
-        <section class="service-page fade-in">
-            <div class="service-details">
-                <div class="service-icon"><i class="fas fa-laptop"></i></div>
-                <h2>Cyber Cafe Services</h2>
-                <div class="divider" style="margin: 0 auto 30px;"></div>
-                <p>We provide all kinds of online services right at your doorstep. Get your PAN card, Aadhaar updates, online form filling, and high-quality printing done quickly and securely without stepping out of your house.</p>
-                <br>
-                <a href="index.html#contact" class="btn btn-primary">Book Service</a>
+        <div class="service-header fade-in">
+            <h2>Cyber Cafe Services</h2>
+            <div class="divider" style="margin: 0 auto 20px;"></div>
+            <p>Get all your essential online documentation, form filling, and printing services done quickly and securely without stepping out of your house.</p>
+        </div>
+
+        <section class="service-feature-grid fade-in">
+            <div class="feature-card">
+                <div class="icon-wrapper"><i class="fas fa-id-card"></i></div>
+                <h3>PAN & Aadhaar Services</h3>
+                <p>Apply for a new PAN card, update your Aadhaar details, or download e-copies instantly.</p>
+                <div class="price-tag">From ₹150</div>
+                <a href="#custom-form" class="btn btn-primary">Book Now</a>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrapper"><i class="fas fa-file-alt"></i></div>
+                <h3>Online Form Filling</h3>
+                <p>Expert assistance for filling out government job applications, university admissions, and scholarship forms.</p>
+                <div class="price-tag">From ₹50</div>
+                <a href="#custom-form" class="btn btn-primary">Book Now</a>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrapper"><i class="fas fa-print"></i></div>
+                <h3>Printouts & Scanning</h3>
+                <p>High-quality color/B&W printing and secure scanning. Free doorstep delivery for bulk orders.</p>
+                <div class="price-tag">₹5 / Page</div>
+                <a href="index.html#contact" class="btn btn-primary">Book Now</a>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrapper"><i class="fas fa-passport"></i></div>
+                <h3>Passport Application</h3>
+                <p>Complete guidance and application processing for new passports or renewals.</p>
+                <div class="price-tag">From ₹300</div>
+                <a href="#custom-form" class="btn btn-primary">Book Now</a>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrapper"><i class="fas fa-plus"></i></div>
+                <h3>Other Online Service</h3>
+                <p>Need something else? Describe your requirement and we will help you out.</p>
+                <div class="price-tag">Custom</div>
+                <a href="#custom-form" class="btn btn-primary">Tell Us</a>
+            </div>
+        </section>
+
+        <section id="custom-form" class="custom-form-section fade-in">
+            <div class="custom-form-container">
+                <h2>Request a Custom Service</h2>
+                <form class="custom-form" onsubmit="event.preventDefault(); alert('Request submitted successfully!');">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="+91 98765 43210" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="service-type">Service Type</label>
+                        <select id="service-type" class="form-control">
+                            <option value="pan-aadhaar">PAN & Aadhaar Services</option>
+                            <option value="form-filling">Online Form Filling</option>
+                            <option value="printouts">Printouts & Scanning</option>
+                            <option value="passport">Passport Application</option>
+                            <option value="other" selected>Other / Custom Request</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="requirements">Specific Requirements</label>
+                        <textarea id="requirements" class="form-control" placeholder="Please describe exactly what you need..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="font-size: 18px; padding: 15px;">Submit Request</button>
+                </form>
             </div>
         </section>
     </div>

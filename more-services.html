@@ -39,14 +39,80 @@
         </div>
     </nav>
     <div class="main-bg">
-        <section class="service-page fade-in">
-            <div class="service-details">
-                <div class="service-icon"><i class="fas fa-cogs"></i></div>
-                <h2>Explore More Services</h2>
-                <div class="divider" style="margin: 0 auto 30px; background-color: #6f42c1;"></div>
-                <p>We are constantly expanding our offerings to make your life easier. Contact us to learn about custom delivery requests, home repair setups, and other on-demand services we provide in your area.</p>
-                <br>
-                <a href="index.html#contact" class="btn btn-purple">Explore All</a>
+        <div class="service-header fade-in">
+            <h2>Explore More Services</h2>
+            <div class="divider" style="margin: 0 auto 20px; background: linear-gradient(90deg, #6f42c1, #9333ea);"></div>
+            <p>We are constantly expanding our offerings to make your life easier. Explore our custom delivery requests, home repair setups, and other on-demand services provided right in your area.</p>
+        </div>
+
+        <section class="service-feature-grid fade-in">
+            <div class="feature-card">
+                <div class="icon-wrapper" style="color: #9333ea; background: #f3e8ff;"><i class="fas fa-box"></i></div>
+                <h3>Courier & Parcel</h3>
+                <p>Doorstep pickup and secure delivery of your important documents and parcels across the city.</p>
+                <div class="price-tag" style="color: #9333ea;">From ₹40</div>
+                <a href="index.html#contact" class="btn btn-primary" style="background:#9333ea; border:none;">Book Pickup</a>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrapper" style="color: #9333ea; background: #f3e8ff;"><i class="fas fa-ticket-alt"></i></div>
+                <h3>Ticket Booking</h3>
+                <p>Train, bus, and flight ticket reservations made easy. Avoid the hassle of confusing portals.</p>
+                <div class="price-tag" style="color: #9333ea;">₹50 Fee</div>
+                <a href="#custom-form" class="btn btn-primary" style="background:#9333ea; border:none;">Book Tickets</a>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrapper" style="color: #9333ea; background: #f3e8ff;"><i class="fas fa-shield-alt"></i></div>
+                <h3>Insurance Premium</h3>
+                <p>Pay your LIC and other health/life insurance premiums instantly without standing in queues.</p>
+                <div class="price-tag" style="color: #9333ea;">Instant Receipt</div>
+                <a href="#custom-form" class="btn btn-primary" style="background:#9333ea; border:none;">Pay Premium</a>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrapper" style="color: #9333ea; background: #f3e8ff;"><i class="fas fa-tools"></i></div>
+                <h3>Home Repairs</h3>
+                <p>Book verified local electricians, plumbers, and carpenters for quick home fixes.</p>
+                <div class="price-tag" style="color: #9333ea;">Varies by Job</div>
+                <a href="#custom-form" class="btn btn-primary" style="background:#9333ea; border:none;">Find Expert</a>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrapper" style="color: #9333ea; background: #f3e8ff;"><i class="fas fa-magic"></i></div>
+                <h3>Custom Request</h3>
+                <p>Need something else entirely? Tell us what you need and we'll make it happen.</p>
+                <div class="price-tag" style="color: #9333ea;">Custom Quote</div>
+                <a href="#custom-form" class="btn btn-primary" style="background:#9333ea; border:none;">Request Now</a>
+            </div>
+        </section>
+
+        <section id="custom-form" class="custom-form-section fade-in">
+            <div class="custom-form-container">
+                <h2 style="color: #9333ea;">Request Custom Service</h2>
+                <form class="custom-form" onsubmit="event.preventDefault(); alert('Custom request submitted successfully!');">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="+91 98765 43210" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="service-type">Service Category</label>
+                        <select id="service-type" class="form-control">
+                            <option value="courier">Courier & Parcel</option>
+                            <option value="ticket">Ticket Booking</option>
+                            <option value="insurance">Insurance Premium</option>
+                            <option value="repair">Home Repairs</option>
+                            <option value="other" selected>Completely Custom Request</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="requirements">Detailed Requirements</label>
+                        <textarea id="requirements" class="form-control" placeholder="Describe exactly what you need help with..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="background: #9333ea; border: none; font-size: 18px; padding: 15px; width: 100%;">Submit Custom Request</button>
+                </form>
             </div>
         </section>
     </div>

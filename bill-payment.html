@@ -39,14 +39,85 @@
         </div>
     </nav>
     <div class="main-bg">
-        <section class="service-page fade-in">
-            <div class="service-details">
-                <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
-                <h2>Bill Payments</h2>
-                <div class="divider" style="margin: 0 auto 30px; background-color: #ffc107;"></div>
-                <p>Never miss a due date! Easily pay your electricity bills, recharge your mobile phones, pay water bills, and manage DTH subscriptions securely through our integrated platform.</p>
-                <br>
-                <a href="index.html#contact" class="btn btn-yellow">Pay Bills Now</a>
+        <div class="service-header fade-in">
+            <h2>Bill Payments</h2>
+            <div class="divider" style="margin: 0 auto 20px; background: linear-gradient(90deg, #ffc107, #f59e0b);"></div>
+            <p>Never miss a due date! Easily pay your electricity bills, recharge your mobile phones, pay water bills, and manage DTH subscriptions securely through our integrated platform.</p>
+            
+            <div class="step-wrapper">
+                <div class="step-item" style="background:#fff; color:#333;"><i class="fas fa-lock" style="color:#28a745;"></i> 100% Secure & Instant</div>
+                <div class="step-item" style="background:#fff; color:#333;"><i class="fas fa-bolt" style="color:#ffc107;"></i> Zero Processing Delay</div>
+            </div>
+        </div>
+
+        <section class="service-feature-grid fade-in" style="padding-top: 10px;">
+            <div class="feature-card">
+                <div class="icon-wrapper" style="color: #f59e0b; background: #fef3c7;"><i class="fas fa-lightbulb"></i></div>
+                <h3>Electricity Bill</h3>
+                <p>Pay your state electricity board bills instantly with auto-fetch and instant receipts.</p>
+                <div class="price-tag" style="color: #f59e0b;">₹10 Processing</div>
+                <a href="#custom-form" class="btn btn-primary" style="background:#f59e0b; border:none;">Pay Now</a>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrapper" style="color: #f59e0b; background: #fef3c7;"><i class="fas fa-mobile-alt"></i></div>
+                <h3>Mobile Recharge</h3>
+                <p>Prepaid and Postpaid recharges for all major telecom operators.</p>
+                <div class="price-tag" style="color: #f59e0b;">No Extra Fee</div>
+                <a href="#custom-form" class="btn btn-primary" style="background:#f59e0b; border:none;">Recharge</a>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrapper" style="color: #f59e0b; background: #fef3c7;"><i class="fas fa-tv"></i></div>
+                <h3>DTH Subscription</h3>
+                <p>Instant DTH recharges for Tata Sky, Airtel, Dish TV, and more.</p>
+                <div class="price-tag" style="color: #f59e0b;">Instant Active</div>
+                <a href="#custom-form" class="btn btn-primary" style="background:#f59e0b; border:none;">Recharge</a>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrapper" style="color: #f59e0b; background: #fef3c7;"><i class="fas fa-tint"></i></div>
+                <h3>Water & Gas Bill</h3>
+                <p>Conveniently clear municipal water bills and piped gas utility bills.</p>
+                <div class="price-tag" style="color: #f59e0b;">₹10 Processing</div>
+                <a href="#custom-form" class="btn btn-primary" style="background:#f59e0b; border:none;">Pay Now</a>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrapper" style="color: #f59e0b; background: #fef3c7;"><i class="fas fa-file-invoice-dollar"></i></div>
+                <h3>Other Bill Payment</h3>
+                <p>Have a different bill? Add your biller details and we'll process it for you.</p>
+                <div class="price-tag" style="color: #f59e0b;">Custom</div>
+                <a href="#custom-form" class="btn btn-primary" style="background:#f59e0b; border:none;">Pay Other Bill</a>
+            </div>
+        </section>
+
+        <section id="custom-form" class="custom-form-section fade-in">
+            <div class="custom-form-container">
+                <h2 style="color: #f59e0b;">Request Custom Bill Payment</h2>
+                <form class="custom-form" onsubmit="event.preventDefault(); alert('Bill details submitted successfully!');">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="+91 98765 43210" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="service-type">Biller Category</label>
+                        <select id="service-type" class="form-control">
+                            <option value="electricity">Electricity</option>
+                            <option value="mobile">Mobile Recharge / Postpaid</option>
+                            <option value="dth">DTH Subscription</option>
+                            <option value="water-gas">Water & Gas Bill</option>
+                            <option value="other" selected>Other Biller</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="requirements">Biller Name & Consumer ID</label>
+                        <textarea id="requirements" class="form-control" placeholder="E.g. BESCOM Electricity, Consumer ID: 123456789..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="background: #f59e0b; border: none; font-size: 18px; padding: 15px; width: 100%;">Submit Bill Details</button>
+                </form>
             </div>
         </section>
     </div>

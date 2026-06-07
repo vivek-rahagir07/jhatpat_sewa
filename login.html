@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Jhatpat Sewa</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #f4f7f6; }
+        .login-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 70px);
+            padding: 40px 20px;
+        }
+        .login-card {
+            display: flex;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+        }
+        .login-image {
+            flex: 1;
+            background: linear-gradient(135deg, #1a96fc 0%, #6c63ff 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .login-image h2 { font-size: 32px; margin-bottom: 15px; }
+        .login-image p { font-size: 16px; opacity: 0.9; }
+        .login-form-container {
+            flex: 1;
+            padding: 60px 50px;
+        }
+        .login-form-container h2 { font-size: 28px; color: #333; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; position: relative; }
+        .form-group i { position: absolute; left: 15px; top: 15px; color: #999; }
+        .form-group input { 
+            width: 100%; padding: 12px 15px 12px 45px; 
+            border: 1px solid #ddd; border-radius: 8px; font-size: 15px;
+            transition: all 0.3s;
+        }
+        .form-group input:focus { border-color: #1a96fc; box-shadow: 0 0 0 3px rgba(26,150,252,0.1); outline: none; }
+        .forgot-password { display: block; text-align: right; font-size: 13px; color: #1a96fc; margin-bottom: 20px; }
+        .login-btn-full { width: 100%; padding: 14px; background: #1a96fc; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .login-btn-full:hover { background: #0d8dfb; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(26,150,252,0.3); }
+        .social-login { display: flex; gap: 15px; margin-top: 25px; }
+        .social-btn { flex: 1; display: flex; justify-content: center; align-items: center; gap: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-weight: 600; color: #555; background: #fff; cursor: pointer; transition: 0.3s; }
+        .social-btn:hover { background: #f9f9f9; }
+        .divider-text { text-align: center; margin: 25px 0; color: #888; position: relative; }
+        .divider-text::before, .divider-text::after { content: ''; position: absolute; top: 50%; width: 45%; height: 1px; background: #ddd; }
+        .divider-text::before { left: 0; }
+        .divider-text::after { right: 0; }
+        
+        @media (max-width: 768px) {
+            .login-card { flex-direction: column; }
+            .login-image { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-text">Jhatpat Sewa</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Services <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 5px;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="cyber-cafe.html"><i class="fas fa-laptop"></i> Cyber Cafe</a>
+                        <a href="grocery.html"><i class="fas fa-shopping-cart"></i> Grocery</a>
+                        <a href="bill-payment.html"><i class="fas fa-lightbulb"></i> Bill Payment</a>
+                        <a href="more-services.html"><i class="fas fa-cogs"></i> More Services</a>
+                    </div>
+                </li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html" class="login-btn">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="login-page fade-in">
+        <div class="login-card">
+            <div class="login-image">
+                <h2>Welcome Back!</h2>
+                <p>Log in to access your dashboard, track your orders, and enjoy our premium services.</p>
+            </div>
+            <div class="login-form-container">
+                <h2>Sign In</h2>
+                <form>
+                    <div class="form-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Password" required>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                    <button type="submit" class="login-btn-full">Login to Account</button>
+                    
+                    <div class="divider-text">OR</div>
+                    
+                    <div class="social-login">
+                        <button type="button" class="social-btn"><i class="fab fa-google" style="color:#db4437"></i> Google</button>
+                        <button type="button" class="social-btn"><i class="fab fa-facebook" style="color:#4267B2"></i> Facebook</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

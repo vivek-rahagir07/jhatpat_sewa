@@ -14,13 +14,21 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="logo-text">Jhatpat Sewa</a>
+            <a href="index.html" class="logo-text">Jhatpat Sewa</a>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#login" class="login-btn">Login</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Services <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 5px;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="cyber-cafe.html"><i class="fas fa-laptop"></i> Cyber Cafe</a>
+                        <a href="grocery.html"><i class="fas fa-shopping-cart"></i> Grocery</a>
+                        <a href="bill-payment.html"><i class="fas fa-lightbulb"></i> Bill Payment</a>
+                        <a href="more-services.html"><i class="fas fa-cogs"></i> More Services</a>
+                    </div>
+                </li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html" class="login-btn">Login</a></li>
             </ul>
             <div class="hamburger">
                 <i class="fas fa-bars"></i>
@@ -74,15 +82,7 @@
         </section>
     </div>
 
-    <!-- About Section -->
-    <section id="about" class="about fade-in">
-        <div class="about-content">
-            <h2>About Us</h2>
-            <div class="divider white-divider"></div>
-            <p>Jhatpat Sewa is your one-stop solution for daily services like online form filling, bill payments, grocery delivery, and more. We provide fast, reliable, and affordable doorstep services with complete customer satisfaction.</p>
-        </div>
-    </section>
-
+    
     <!-- Why Choose Us Section -->
     <section class="features fade-in">
         <h2>Why Choose Jhatpat Sewa?</h2>
@@ -129,32 +129,7 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact fade-in">
-        <div class="contact-wrapper">
-            <h2>Contact Us</h2>
-            <div class="divider"></div>
-            <div class="contact-info">
-                <div class="info-item"><i class="fas fa-map-marker-alt"></i><p>123 Jhatpat Street, City</p></div>
-                <div class="info-item"><i class="fas fa-phone"></i><p>+91 9876543210</p></div>
-                <div class="info-item"><i class="fas fa-envelope"></i><p>support@jhatpatsewa.com</p></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Login Section -->
-    <section id="login" class="login-section fade-in">
-        <div class="login-wrapper">
-            <h2>Login</h2>
-            <div class="divider"></div>
-            <form class="login-form">
-                <input type="email" placeholder="Email Address" required>
-                <input type="password" placeholder="Password" required>
-                <button type="submit" class="btn btn-primary w-100">Sign In</button>
-            </form>
-        </div>
-    </section>
-
+    
     <!-- Footer -->
     <footer>
         <p>&copy; 2026 Jhatpat Sewa | Fast - Easy - Reliable Service</p>

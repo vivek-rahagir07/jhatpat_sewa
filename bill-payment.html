@@ -7,12 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .service-page { padding: 100px 20px; text-align: center; }
-        .service-details { max-width: 800px; margin: 0 auto; background: white; padding: 50px; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.08); }
-        .service-icon { font-size: 60px; color: #ffc107; margin-bottom: 20px; }
-        .btn-yellow { background-color: #ffc107; color: #222; }
-    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -36,143 +30,208 @@
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="login.html" class="login-btn">Login</a></li>
             </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
     </nav>
-    <div class="main-bg">
-        <div class="service-header fade-in">
-            <h2>Bill Payments</h2>
-            <div class="divider" style="margin: 0 auto 20px; background: linear-gradient(90deg, #ffc107, #f59e0b);"></div>
-            <p>Never miss a due date! Easily pay your electricity bills, recharge your mobile phones, pay water bills, and manage DTH subscriptions securely through our integrated platform.</p>
-            
-            <div class="step-wrapper">
-                <div class="step-item" style="background:#fff; color:#333;"><i class="fas fa-lock" style="color:#28a745;"></i> 100% Secure & Instant</div>
-                <div class="step-item" style="background:#fff; color:#333;"><i class="fas fa-bolt" style="color:#ffc107;"></i> Zero Processing Delay</div>
+
+    <div class="main-bg bill-page">
+        <!-- Home View: Category Grid -->
+        <div id="bill-home" class="bill-view active">
+            <div class="bill-hero fade-in">
+                <h2>Recharge &amp; Pay Bills</h2>
+                <p>Pay electricity, mobile, DTH, water, gas and more — just like PhonePe &amp; BHIM</p>
+                <div class="bill-search-wrap">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="bill-search" placeholder="Search biller or category..." autocomplete="off">
+                </div>
+            </div>
+
+            <section id="recent-payments" class="recent-section fade-in" style="display:none;">
+                <h3><i class="fas fa-history"></i> Recent Payments</h3>
+                <div id="recent-list" class="recent-list"></div>
+            </section>
+
+            <section class="bill-categories-section fade-in">
+                <h3>All Categories</h3>
+                <div id="bill-category-grid" class="bill-category-grid"></div>
+            </section>
+
+            <div class="bill-trust-bar fade-in">
+                <span><i class="fas fa-lock"></i> 100% Secure</span>
+                <span><i class="fas fa-bolt"></i> Instant Processing</span>
+                <span><i class="fas fa-receipt"></i> Instant Receipt</span>
             </div>
         </div>
 
-        <section class="service-feature-grid fade-in" style="padding-top: 10px;">
-            <div class="feature-card">
-                <div class="icon-wrapper" style="color: #f59e0b; background: #fef3c7;"><i class="fas fa-lightbulb"></i></div>
-                <h3>Electricity Bill</h3>
-                <p>Pay your state electricity board bills instantly with auto-fetch and instant receipts.</p>
-                <div class="price-tag" style="color: #f59e0b;">₹10 Processing</div>
-                <a href="#custom-form" class="btn btn-primary" style="background:#f59e0b; border:none;">Pay Now</a>
+        <!-- Payment Flow View -->
+        <div id="payment-flow" class="bill-view">
+            <div class="flow-header">
+                <button id="back-to-home" class="back-btn" aria-label="Go back"><i class="fas fa-arrow-left"></i></button>
+                <div class="flow-title-wrap">
+                    <span id="flow-category-icon" class="flow-cat-icon"></span>
+                    <h2 id="flow-category-name">Electricity</h2>
+                </div>
             </div>
-            <div class="feature-card">
-                <div class="icon-wrapper" style="color: #f59e0b; background: #fef3c7;"><i class="fas fa-mobile-alt"></i></div>
-                <h3>Mobile Recharge</h3>
-                <p>Prepaid and Postpaid recharges for all major telecom operators.</p>
-                <div class="price-tag" style="color: #f59e0b;">No Extra Fee</div>
-                <a href="#custom-form" class="btn btn-primary" style="background:#f59e0b; border:none;">Recharge</a>
-            </div>
-            <div class="feature-card">
-                <div class="icon-wrapper" style="color: #f59e0b; background: #fef3c7;"><i class="fas fa-tv"></i></div>
-                <h3>DTH Subscription</h3>
-                <p>Instant DTH recharges for Tata Sky, Airtel, Dish TV, and more.</p>
-                <div class="price-tag" style="color: #f59e0b;">Instant Active</div>
-                <a href="#custom-form" class="btn btn-primary" style="background:#f59e0b; border:none;">Recharge</a>
-            </div>
-            <div class="feature-card">
-                <div class="icon-wrapper" style="color: #f59e0b; background: #fef3c7;"><i class="fas fa-tint"></i></div>
-                <h3>Water & Gas Bill</h3>
-                <p>Conveniently clear municipal water bills and piped gas utility bills.</p>
-                <div class="price-tag" style="color: #f59e0b;">₹10 Processing</div>
-                <a href="#custom-form" class="btn btn-primary" style="background:#f59e0b; border:none;">Pay Now</a>
-            </div>
-            <div class="feature-card">
-                <div class="icon-wrapper" style="color: #f59e0b; background: #fef3c7;"><i class="fas fa-file-invoice-dollar"></i></div>
-                <h3>Other Bill Payment</h3>
-                <p>Have a different bill? Add your biller details and we'll process it for you.</p>
-                <div class="price-tag" style="color: #f59e0b;">Custom</div>
-                <a href="#custom-form" class="btn btn-primary" style="background:#f59e0b; border:none;">Pay Other Bill</a>
-            </div>
-        </section>
 
-        <section id="custom-form" class="custom-form-section fade-in">
-            <div class="custom-form-container">
-                <h2 style="color: #f59e0b;">Request Custom Bill Payment</h2>
-                <form class="custom-form" onsubmit="event.preventDefault(); alert('Bill details submitted successfully!');">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" class="form-control" placeholder="Vivek yadav" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" class="form-control" placeholder="+91 9996445592" required>
-                        </div>
-                    </div>
+            <div class="step-indicator">
+                <div class="step-dot active" data-step="1"></div>
+                <div class="step-line"></div>
+                <div class="step-dot" data-step="2"></div>
+                <div class="step-line"></div>
+                <div class="step-dot" data-step="3"></div>
+            </div>
+
+            <div class="flow-card">
+                <div class="flow-step active" data-step="1">
+                    <h3>Enter Details</h3>
+
                     <div class="form-group">
-                        <label for="service-type">Biller Category</label>
-                        <select id="service-type" class="form-control" onchange="showBillDocs(this.value)">
-                            <option value="electricity">Electricity</option>
-                            <option value="mobile">Mobile Recharge / Postpaid</option>
-                            <option value="dth">DTH Subscription</option>
-                            <option value="water-gas">Water & Gas Bill</option>
-                            <option value="other" selected>Other Biller</option>
+                        <label for="biller-select">Select Biller</label>
+                        <select id="biller-select" class="form-control">
+                            <option value="">Select Biller</option>
                         </select>
                     </div>
 
-                    <!-- Dynamic Required Info Checklist -->
-                    <div id="bill-doc-checklist" style="background: #fef9e7; border-radius: 12px; padding: 20px 25px; border-left: 5px solid #f59e0b; display: none;">
-                        <h4 style="margin: 0 0 12px; color: #1f303e; font-size: 16px;"><i class="fas fa-clipboard-list" style="margin-right: 8px; color: #f59e0b;"></i>Required Information</h4>
-                        <ul id="bill-doc-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: #444;"></ul>
+                    <div class="form-group">
+                        <label id="account-label" for="account-input">Consumer Number</label>
+                        <input type="text" id="account-input" class="form-control" placeholder="Enter details">
                     </div>
 
-                    <div class="form-group">
-                        <label for="requirements">Biller Name & Consumer ID</label>
-                        <textarea id="requirements" class="form-control" placeholder="E.g. BESCOM Electricity, Consumer ID: 123456789..."></textarea>
+                    <div id="recharge-amounts" class="recharge-amounts" style="display:none;"></div>
+
+                    <div class="form-group" id="custom-amount-group">
+                        <label for="custom-amount">Amount (₹)</label>
+                        <input type="number" id="custom-amount" class="form-control" placeholder="Enter amount" min="10">
                     </div>
-                    <div class="form-group">
-                        <label for="bill-copy">Upload Previous Bill Copy (optional)</label>
-                        <input type="file" id="bill-copy" class="form-control" style="background: white; padding: 10px 15px;" multiple>
-                        <small style="color: #666; font-size: 13px; margin-top: 5px;">Upload a photo or scan of your previous bill for faster processing.</small>
+
+                    <div id="fetch-loader" class="fetch-loader" style="display:none;">
+                        <div class="spinner"></div>
+                        <span>Fetching bill details...</span>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="background: #f59e0b; border: none; font-size: 18px; padding: 15px; width: 100%;">Submit Bill Details</button>
-                </form>
+
+                    <button id="fetch-bill-btn" class="btn btn-primary bill-action-btn">
+                        <i class="fas fa-search"></i> Fetch Bill
+                    </button>
+                </div>
+
+                <div class="flow-step" data-step="2">
+                    <h3>Bill Details</h3>
+                    <div id="bill-preview" class="bill-preview" style="display:none;">
+                        <div class="preview-row">
+                            <span>Biller</span>
+                            <strong id="preview-biller">—</strong>
+                        </div>
+                        <div class="preview-row">
+                            <span>Account / Number</span>
+                            <strong id="preview-account">—</strong>
+                        </div>
+                        <div class="preview-row">
+                            <span>Customer Name</span>
+                            <strong id="preview-customer">—</strong>
+                        </div>
+                        <div class="preview-row">
+                            <span>Due Date</span>
+                            <strong id="preview-due">—</strong>
+                        </div>
+                        <div class="preview-amount-row">
+                            <span>Amount Payable</span>
+                            <strong id="preview-amount" class="preview-amount">₹0</strong>
+                        </div>
+                    </div>
+
+                    <button id="pay-bill-btn" class="btn btn-primary bill-action-btn" style="display:none;">
+                        <i class="fas fa-wallet"></i> Proceed to Pay
+                    </button>
+                </div>
             </div>
-        </section>
+        </div>
+
+        <!-- Success View -->
+        <div id="success-view" class="bill-view">
+            <div class="success-card">
+                <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+                <h2>Payment Successful!</h2>
+                <p class="success-sub">Your bill has been paid successfully</p>
+
+                <div class="success-details">
+                    <div class="success-row">
+                        <span>Amount Paid</span>
+                        <strong id="success-amount">₹0</strong>
+                    </div>
+                    <div class="success-row">
+                        <span>Biller</span>
+                        <strong id="success-biller">—</strong>
+                    </div>
+                    <div class="success-row">
+                        <span>Payment Method</span>
+                        <strong id="success-method">—</strong>
+                    </div>
+                    <div class="success-row">
+                        <span>Transaction ID</span>
+                        <strong id="success-txn">—</strong>
+                    </div>
+                </div>
+
+                <button id="back-from-success" class="btn btn-primary bill-action-btn">Pay Another Bill</button>
+            </div>
+        </div>
     </div>
+
+    <!-- Payment Method Modal -->
+    <div id="payment-modal" class="payment-modal">
+        <div class="payment-modal-content">
+            <button id="close-payment-modal" class="modal-close" aria-label="Close"><i class="fas fa-times"></i></button>
+            <h3>Choose Payment Method</h3>
+            <p class="modal-biller" id="pay-biller-display">Biller Name</p>
+            <p class="modal-amount" id="pay-amount-display">₹0</p>
+
+            <div class="pay-methods">
+                <button class="pay-method-btn" data-method="UPI / GPay">
+                    <span class="method-icon upi"><i class="fas fa-qrcode"></i></span>
+                    <span>UPI / GPay</span>
+                </button>
+                <button class="pay-method-btn" data-method="PhonePe">
+                    <span class="method-icon phonepe"><i class="fas fa-mobile-alt"></i></span>
+                    <span>PhonePe</span>
+                </button>
+                <button class="pay-method-btn" data-method="BHIM UPI">
+                    <span class="method-icon bhim"><i class="fas fa-university"></i></span>
+                    <span>BHIM UPI</span>
+                </button>
+                <button class="pay-method-btn" data-method="Debit / Credit Card">
+                    <span class="method-icon card"><i class="fas fa-credit-card"></i></span>
+                    <span>Card</span>
+                </button>
+                <button class="pay-method-btn" data-method="Net Banking">
+                    <span class="method-icon netbank"><i class="fas fa-landmark"></i></span>
+                    <span>Net Banking</span>
+                </button>
+                <button class="pay-method-btn" data-method="Jhatpat Wallet">
+                    <span class="method-icon wallet"><i class="fas fa-wallet"></i></span>
+                    <span>Wallet</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Processing Overlay -->
+    <div id="payment-processing" class="payment-processing">
+        <div class="processing-content">
+            <div class="spinner large"></div>
+            <p>Processing payment...</p>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="bill-toast" class="bill-toast"></div>
+
     <footer>
         <p>&copy; 2026 Jhatpat Sewa | Fast - Easy - Reliable Service</p>
     </footer>
-    <script src="script.js"></script>
-    <script>
-        const billDocs = {
-            'electricity': [
-                'Consumer Number / Account ID',
-                'Previous bill copy (for reference)',
-                'Registered mobile number'
-            ],
-            'mobile': [
-                'Mobile number to recharge',
-                'Operator name (Jio, Airtel, Vi, BSNL)',
-                'Plan amount or plan name'
-            ],
-            'dth': [
-                'Subscriber ID / Smart Card Number',
-                'DTH Operator (Tata Sky, Airtel, Dish TV)',
-                'Recharge amount'
-            ],
-            'water-gas': [
-                'Consumer ID / Connection Number',
-                'Municipality / Board name',
-                'Previous bill copy (optional)'
-            ],
-            'other': []
-        };
 
-        function showBillDocs(val) {
-            const box = document.getElementById('bill-doc-checklist');
-            const list = document.getElementById('bill-doc-list');
-            const items = billDocs[val] || [];
-            if (items.length === 0) {
-                box.style.display = 'none';
-                return;
-            }
-            list.innerHTML = items.map(d => '<li><i class="fas fa-check-circle" style="color:#f59e0b; margin-right:8px;"></i>' + d + '</li>').join('');
-            box.style.display = 'block';
-        }
-    </script>
+    <script src="script.js"></script>
+    <script src="bill-payment.js"></script>
 </body>
 </html>

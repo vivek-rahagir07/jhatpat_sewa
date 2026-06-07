@@ -8,9 +8,391 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .service-page { padding: 100px 20px; text-align: center; }
-        .service-details { max-width: 800px; margin: 0 auto; background: white; padding: 50px; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.08); }
-        .service-icon { font-size: 60px; color: #28a745; margin-bottom: 20px; }
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px 20px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .cat-tab {
+            padding: 10px 22px;
+            border-radius: 30px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            color: #555;
+            transition: all 0.3s ease;
+        }
+        .cat-tab:hover, .cat-tab.active {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
+            transform: scale(1.05);
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 0 20px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+        .product-card .product-emoji {
+            font-size: 50px;
+            margin-bottom: 12px;
+        }
+        .product-card h4 {
+            font-size: 16px;
+            color: #222;
+            margin-bottom: 5px;
+        }
+        .product-card .weight {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        .product-card .product-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+        .add-btn {
+            padding: 10px 30px;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            background: white;
+            color: #28a745;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .add-btn:hover {
+            background: #28a745;
+            color: white;
+        }
+
+        /* Quantity Controls */
+        .qty-controls {
+            display: none;
+            align-items: center;
+            gap: 12px;
+        }
+        .qty-controls button {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .qty-minus {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+        .qty-minus:hover { background: #ef4444; color: white; }
+        .qty-plus {
+            background: #dcfce7;
+            color: #28a745;
+        }
+        .qty-plus:hover { background: #28a745; color: white; }
+        .qty-num {
+            font-size: 20px;
+            font-weight: 700;
+            color: #222;
+            min-width: 25px;
+            text-align: center;
+        }
+
+        /* Floating Cart Button */
+        .cart-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #28a745, #15803d);
+            color: white;
+            font-size: 26px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(40,167,69,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .cart-fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(40,167,69,0.5);
+        }
+        .cart-fab .badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #ef4444;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Cart Drawer Overlay */
+        .cart-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        .cart-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Cart Drawer */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 420px;
+            max-width: 90vw;
+            height: 100vh;
+            background: white;
+            z-index: 1001;
+            box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+        }
+        .cart-drawer.open {
+            right: 0;
+        }
+        .cart-header {
+            padding: 20px 25px;
+            background: linear-gradient(135deg, #28a745, #15803d);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-header h3 {
+            font-size: 20px;
+            margin: 0;
+        }
+        .cart-close {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 20px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .cart-close:hover {
+            background: rgba(255,255,255,0.4);
+        }
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px 20px;
+        }
+        .cart-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        .cart-empty i {
+            font-size: 60px;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .cart-item-emoji {
+            font-size: 36px;
+        }
+        .cart-item-info {
+            flex: 1;
+        }
+        .cart-item-info h4 {
+            font-size: 15px;
+            color: #222;
+            margin: 0 0 3px;
+        }
+        .cart-item-info small {
+            color: #888;
+            font-size: 13px;
+        }
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .cart-item-qty button {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: none;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .cart-item-price {
+            font-weight: 700;
+            color: #28a745;
+            font-size: 16px;
+            min-width: 60px;
+            text-align: right;
+        }
+        .cart-footer {
+            padding: 20px 25px;
+            border-top: 2px solid #f0f0f0;
+            background: #fafffe;
+        }
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1f303e;
+            margin-bottom: 15px;
+        }
+        .cart-total span:last-child {
+            color: #28a745;
+        }
+        .checkout-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #28a745, #15803d);
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .checkout-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(40,167,69,0.3);
+        }
+
+        /* Checkout Modal */
+        .checkout-modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 1100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .checkout-modal.open {
+            display: flex;
+        }
+        .checkout-box {
+            background: white;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            animation: slideUp 0.4s ease;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .checkout-box h2 {
+            font-size: 28px;
+            color: #1f303e;
+            margin-bottom: 5px;
+        }
+        .checkout-box .order-summary {
+            background: #f0fdf4;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: #444;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        .checkout-box .order-summary .line {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+        }
+        .checkout-box .order-summary .line.total-line {
+            font-weight: 700;
+            font-size: 16px;
+            color: #28a745;
+            border-top: 1px dashed #c3e6cb;
+            padding-top: 10px;
+            margin-top: 8px;
+        }
+
+        /* Delivery badge on product */
+        .delivery-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #28a745;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
     </style>
 </head>
 <body>
@@ -37,97 +419,275 @@
             </ul>
         </div>
     </nav>
+
     <div class="main-bg">
         <div class="service-header fade-in">
             <h2>Grocery Delivery</h2>
             <div class="divider" style="margin: 0 auto 20px; background: linear-gradient(90deg, #28a745, #15803d);"></div>
-            <p>Fresh vegetables, fruits, and daily household essentials delivered straight to your home within minutes. Skip the line and shop for all your grocery needs from the comfort of your home.</p>
-            
+            <p>Fresh vegetables, fruits, and daily household essentials delivered straight to your home. Add items to your cart and checkout instantly!</p>
             <div class="step-wrapper">
-                <div class="step-item"><div class="step-number" style="background:#28a745;">1</div> Browse & Select</div>
-                <div class="step-item"><div class="step-number" style="background:#28a745;">2</div> We Pack Fresh</div>
-                <div class="step-item"><div class="step-number" style="background:#28a745;">3</div> Fast Delivery</div>
+                <div class="step-item"><div class="step-number" style="background:#28a745;">1</div> Add to Cart</div>
+                <div class="step-item"><div class="step-number" style="background:#28a745;">2</div> Checkout</div>
+                <div class="step-item"><div class="step-number" style="background:#28a745;">3</div> Delivered!</div>
             </div>
         </div>
 
-        <section class="service-feature-grid fade-in" style="padding-top: 10px; padding-bottom: 40px;">
-            <div class="feature-card">
-                <div class="icon-wrapper" style="color: #28a745; background: #e6f6ea;"><i class="fas fa-carrot"></i></div>
-                <h3>Fresh Vegetables</h3>
-                <p>Farm-fresh vegetables handpicked and delivered to your doorstep daily.</p>
-                <div class="price-tag" style="color: #28a745;">Market Price</div>
-                <a href="#custom-form" class="btn btn-secondary">Add to Cart</a>
-            </div>
-            <div class="feature-card">
-                <div class="icon-wrapper" style="color: #28a745; background: #e6f6ea;"><i class="fas fa-apple-alt"></i></div>
-                <h3>Seasonal Fruits</h3>
-                <p>Sweet, fresh, and perfectly ripe fruits sourced from the best local farms.</p>
-                <div class="price-tag" style="color: #28a745;">Market Price</div>
-                <a href="#custom-form" class="btn btn-secondary">Add to Cart</a>
-            </div>
-            <div class="feature-card">
-                <div class="icon-wrapper" style="color: #28a745; background: #e6f6ea;"><i class="fas fa-cheese"></i></div>
-                <h3>Dairy & Bakery</h3>
-                <p>Milk, paneer, eggs, fresh bread, and other daily essentials delivered morning and evening.</p>
-                <div class="price-tag" style="color: #28a745;">MRP</div>
-                <a href="#custom-form" class="btn btn-secondary">Add to Cart</a>
-            </div>
-            <div class="feature-card">
-                <div class="icon-wrapper" style="color: #28a745; background: #e6f6ea;"><i class="fas fa-box-open"></i></div>
-                <h3>Pantry Staples</h3>
-                <p>Rice, dal, oil, spices, and packaged goods available in all sizes.</p>
-                <div class="price-tag" style="color: #28a745;">Up to 10% Off</div>
-                <a href="#custom-form" class="btn btn-secondary">Add to Cart</a>
-            </div>
-            <div class="feature-card">
-                <div class="icon-wrapper" style="color: #28a745; background: #e6f6ea;"><i class="fas fa-list-ul"></i></div>
-                <h3>Custom Grocery List</h3>
-                <p>Have a specific list? Just type or paste it here and we'll bring it all to you.</p>
-                <div class="price-tag" style="color: #28a745;">Custom</div>
-                <a href="#custom-form" class="btn btn-secondary">Upload List</a>
-            </div>
-        </section>
-        
-        <section id="custom-form" class="custom-form-section fade-in">
-            <div class="custom-form-container">
-                <h2 style="color: #28a745;">Submit Custom Grocery List</h2>
-                <form class="custom-form" onsubmit="event.preventDefault(); alert('List submitted successfully!');">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" class="form-control" placeholder="John Doe" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" class="form-control" placeholder="+91 98765 43210" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="service-type">Category</label>
-                        <select id="service-type" class="form-control">
-                            <option value="vegetables">Fresh Vegetables</option>
-                            <option value="fruits">Seasonal Fruits</option>
-                            <option value="dairy">Dairy & Bakery</option>
-                            <option value="pantry">Pantry Staples</option>
-                            <option value="other" selected>Custom List / Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="requirements">Your List & Requirements</label>
-                        <textarea id="requirements" class="form-control" placeholder="E.g. 1kg potatoes, 500g paneer, 2 liters whole milk..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-secondary" style="font-size: 18px; padding: 15px; width: 100%;">Submit Grocery List</button>
-                </form>
-            </div>
-        </section>
+        <!-- Category Filter Tabs -->
+        <div class="category-tabs fade-in">
+            <button class="cat-tab active" onclick="filterCat('all')">All</button>
+            <button class="cat-tab" onclick="filterCat('vegetables')">🥬 Vegetables</button>
+            <button class="cat-tab" onclick="filterCat('fruits')">🍎 Fruits</button>
+            <button class="cat-tab" onclick="filterCat('dairy')">🥛 Dairy</button>
+            <button class="cat-tab" onclick="filterCat('staples')">🍚 Staples</button>
+            <button class="cat-tab" onclick="filterCat('snacks')">🍪 Snacks</button>
+        </div>
 
-        <div class="fade-in" style="text-align: center; padding-bottom: 80px; background: #f8faff;">
-            <a href="https://wa.me/919876543210" class="btn btn-secondary" style="font-size: 20px; padding: 15px 40px; border-radius: 30px; box-shadow: 0 10px 25px rgba(40,167,69,0.3);"><i class="fab fa-whatsapp" style="margin-right: 10px; font-size: 24px;"></i> Order on WhatsApp</a>
+        <!-- Product Grid -->
+        <div class="product-grid fade-in" id="productGrid"></div>
+
+        <div class="fade-in" style="text-align: center; padding: 20px 20px 80px; background: #f0f4f8;">
+            <a href="https://wa.me/919996445592" class="btn btn-secondary" style="font-size: 20px; padding: 15px 40px; border-radius: 30px; box-shadow: 0 10px 25px rgba(40,167,69,0.3);"><i class="fab fa-whatsapp" style="margin-right: 10px; font-size: 24px;"></i> Order on WhatsApp</a>
         </div>
     </div>
+
+    <!-- Floating Cart Button -->
+    <button class="cart-fab" onclick="toggleCart()" id="cartFab" style="display:none;">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="badge" id="cartBadge">0</span>
+    </button>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-bag" style="margin-right: 10px;"></i>Your Cart</h3>
+            <button class="cart-close" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItemsList">
+            <div class="cart-empty">
+                <i class="fas fa-shopping-basket"></i>
+                <p>Your cart is empty.<br>Start adding items!</p>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-total">
+                <span>Total</span>
+                <span id="cartTotal">₹0</span>
+            </div>
+            <button class="checkout-btn" onclick="openCheckout()"><i class="fas fa-bolt" style="margin-right: 8px;"></i> Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-box">
+            <h2 style="text-align:center;">🛒 Confirm Order</h2>
+            <div class="order-summary" id="orderSummary"></div>
+            <form class="custom-form" onsubmit="event.preventDefault(); placeOrder();">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="checkout-name">Your Name</label>
+                        <input type="text" id="checkout-name" class="form-control" placeholder="Vivek yadav" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-phone">Phone Number</label>
+                        <input type="tel" id="checkout-phone" class="form-control" placeholder="+91 9996445592" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="checkout-address">Delivery Address</label>
+                    <textarea id="checkout-address" class="form-control" placeholder="House/Flat No., Street, Locality, Landmark..." style="min-height: 80px;" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="checkout-notes">Special Instructions (optional)</label>
+                    <input type="text" id="checkout-notes" class="form-control" placeholder="E.g. No onions, extra ripe mangoes...">
+                </div>
+                <button type="submit" class="checkout-btn" style="margin-top: 10px;"><i class="fas fa-check-circle" style="margin-right: 8px;"></i> Place Order</button>
+                <button type="button" onclick="closeCheckout()" style="width:100%; padding:12px; margin-top:10px; background:none; border:2px solid #ddd; border-radius:12px; font-size:16px; cursor:pointer; font-family:'Outfit',sans-serif; color:#666;">Cancel</button>
+            </form>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 Jhatpat Sewa | Fast - Easy - Reliable Service</p>
     </footer>
     <script src="script.js"></script>
+    <script>
+        // Product Catalog
+        const products = [
+            { id: 1,  name: 'Potato (Aloo)',      emoji: '🥔', weight: '1 kg',   price: 30,  cat: 'vegetables' },
+            { id: 2,  name: 'Tomato',              emoji: '🍅', weight: '500 g',  price: 25,  cat: 'vegetables' },
+            { id: 3,  name: 'Onion (Pyaz)',        emoji: '🧅', weight: '1 kg',   price: 35,  cat: 'vegetables' },
+            { id: 4,  name: 'Green Chilli',        emoji: '🌶️', weight: '250 g',  price: 15,  cat: 'vegetables' },
+            { id: 5,  name: 'Carrot (Gajar)',      emoji: '🥕', weight: '500 g',  price: 40,  cat: 'vegetables' },
+            { id: 6,  name: 'Cauliflower',         emoji: '🥦', weight: '1 pc',   price: 30,  cat: 'vegetables' },
+            { id: 7,  name: 'Apple',               emoji: '🍎', weight: '1 kg',   price: 180, cat: 'fruits' },
+            { id: 8,  name: 'Banana',              emoji: '🍌', weight: '1 dozen', price: 50, cat: 'fruits' },
+            { id: 9,  name: 'Mango (Aam)',         emoji: '🥭', weight: '1 kg',   price: 120, cat: 'fruits' },
+            { id: 10, name: 'Grapes (Angoor)',     emoji: '🍇', weight: '500 g',  price: 80,  cat: 'fruits' },
+            { id: 11, name: 'Amul Milk',           emoji: '🥛', weight: '1 ltr',  price: 68,  cat: 'dairy' },
+            { id: 12, name: 'Paneer',              emoji: '🧀', weight: '200 g',  price: 90,  cat: 'dairy' },
+            { id: 13, name: 'Curd (Dahi)',         emoji: '🥣', weight: '400 g',  price: 40,  cat: 'dairy' },
+            { id: 14, name: 'Eggs',                emoji: '🥚', weight: '12 pcs', price: 80,  cat: 'dairy' },
+            { id: 15, name: 'Bread',               emoji: '🍞', weight: '400 g',  price: 45,  cat: 'dairy' },
+            { id: 16, name: 'Basmati Rice',        emoji: '🍚', weight: '5 kg',   price: 420, cat: 'staples' },
+            { id: 17, name: 'Toor Dal',            emoji: '🫘', weight: '1 kg',   price: 160, cat: 'staples' },
+            { id: 18, name: 'Sunflower Oil',       emoji: '🫙', weight: '1 ltr',  price: 140, cat: 'staples' },
+            { id: 19, name: 'Sugar (Cheeni)',      emoji: '🧂', weight: '1 kg',   price: 45,  cat: 'staples' },
+            { id: 20, name: 'Atta (Wheat Flour)',  emoji: '🌾', weight: '5 kg',   price: 250, cat: 'staples' },
+            { id: 21, name: 'Maggi Noodles',       emoji: '🍜', weight: '4 pack', price: 56,  cat: 'snacks' },
+            { id: 22, name: 'Parle-G Biscuits',    emoji: '🍪', weight: '800 g',  price: 80,  cat: 'snacks' },
+            { id: 23, name: 'Chips (Lays)',        emoji: '🥔', weight: '90 g',   price: 30,  cat: 'snacks' },
+            { id: 24, name: 'Namkeen Mix',         emoji: '🥜', weight: '400 g',  price: 120, cat: 'snacks' },
+        ];
+
+        let cart = {};
+
+        function renderProducts(catFilter) {
+            const grid = document.getElementById('productGrid');
+            const filtered = catFilter === 'all' ? products : products.filter(p => p.cat === catFilter);
+            grid.innerHTML = filtered.map(p => {
+                const qty = cart[p.id] || 0;
+                return `
+                <div class="product-card" data-cat="${p.cat}">
+                    <span class="delivery-badge"><i class="fas fa-bolt"></i> 30 min</span>
+                    <div class="product-emoji">${p.emoji}</div>
+                    <h4>${p.name}</h4>
+                    <div class="weight">${p.weight}</div>
+                    <div class="product-price">₹${p.price}</div>
+                    <button class="add-btn" id="add-${p.id}" onclick="addToCart(${p.id})" style="${qty > 0 ? 'display:none' : ''}">+ ADD</button>
+                    <div class="qty-controls" id="qty-${p.id}" style="${qty > 0 ? 'display:flex' : ''}">
+                        <button class="qty-minus" onclick="changeQty(${p.id}, -1)">−</button>
+                        <span class="qty-num" id="qn-${p.id}">${qty}</span>
+                        <button class="qty-plus" onclick="changeQty(${p.id}, 1)">+</button>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function addToCart(id) {
+            cart[id] = 1;
+            document.getElementById('add-' + id).style.display = 'none';
+            document.getElementById('qty-' + id).style.display = 'flex';
+            document.getElementById('qn-' + id).textContent = 1;
+            updateCartUI();
+        }
+
+        function changeQty(id, delta) {
+            cart[id] = (cart[id] || 0) + delta;
+            if (cart[id] <= 0) {
+                delete cart[id];
+                document.getElementById('add-' + id).style.display = '';
+                document.getElementById('qty-' + id).style.display = 'none';
+            } else {
+                document.getElementById('qn-' + id).textContent = cart[id];
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const ids = Object.keys(cart);
+            const count = ids.reduce((s, id) => s + cart[id], 0);
+            const total = ids.reduce((s, id) => {
+                const p = products.find(x => x.id == id);
+                return s + p.price * cart[id];
+            }, 0);
+
+            const fab = document.getElementById('cartFab');
+            fab.style.display = count > 0 ? 'flex' : 'none';
+            document.getElementById('cartBadge').textContent = count;
+
+            const list = document.getElementById('cartItemsList');
+            const footer = document.getElementById('cartFooter');
+
+            if (ids.length === 0) {
+                list.innerHTML = '<div class="cart-empty"><i class="fas fa-shopping-basket"></i><p>Your cart is empty.<br>Start adding items!</p></div>';
+                footer.style.display = 'none';
+            } else {
+                list.innerHTML = ids.map(id => {
+                    const p = products.find(x => x.id == id);
+                    return `
+                    <div class="cart-item">
+                        <span class="cart-item-emoji">${p.emoji}</span>
+                        <div class="cart-item-info">
+                            <h4>${p.name}</h4>
+                            <small>${p.weight} × ${cart[id]}</small>
+                        </div>
+                        <div class="cart-item-qty">
+                            <button class="qty-minus" onclick="changeQty(${id}, -1)">−</button>
+                            <span class="qty-num">${cart[id]}</span>
+                            <button class="qty-plus" onclick="changeQty(${id}, 1)">+</button>
+                        </div>
+                        <span class="cart-item-price">₹${p.price * cart[id]}</span>
+                    </div>`;
+                }).join('');
+                footer.style.display = 'block';
+                document.getElementById('cartTotal').textContent = '₹' + total;
+            }
+        }
+
+        function toggleCart() {
+            document.getElementById('cartDrawer').classList.toggle('open');
+            document.getElementById('cartOverlay').classList.toggle('open');
+        }
+
+        function filterCat(cat) {
+            document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            renderProducts(cat);
+        }
+
+        function openCheckout() {
+            toggleCart();
+            const ids = Object.keys(cart);
+            const total = ids.reduce((s, id) => {
+                const p = products.find(x => x.id == id);
+                return s + p.price * cart[id];
+            }, 0);
+            const summary = document.getElementById('orderSummary');
+            summary.innerHTML = ids.map(id => {
+                const p = products.find(x => x.id == id);
+                return `<div class="line"><span>${p.emoji} ${p.name} × ${cart[id]}</span><span>₹${p.price * cart[id]}</span></div>`;
+            }).join('') + `<div class="line total-line"><span>Total</span><span>₹${total}</span></div>`;
+            document.getElementById('checkoutModal').classList.add('open');
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').classList.remove('open');
+        }
+
+        function placeOrder() {
+            const name = document.getElementById('checkout-name').value;
+            const phone = document.getElementById('checkout-phone').value;
+            const address = document.getElementById('checkout-address').value;
+            const notes = document.getElementById('checkout-notes').value;
+            const ids = Object.keys(cart);
+            const total = ids.reduce((s, id) => {
+                const p = products.find(x => x.id == id);
+                return s + p.price * cart[id];
+            }, 0);
+
+            let msg = `🛒 *New Grocery Order*\n\n`;
+            msg += `👤 *Name:* ${name}\n📱 *Phone:* ${phone}\n📍 *Address:* ${address}\n`;
+            if (notes) msg += `📝 *Notes:* ${notes}\n`;
+            msg += `\n*Items:*\n`;
+            ids.forEach(id => {
+                const p = products.find(x => x.id == id);
+                msg += `${p.emoji} ${p.name} (${p.weight}) × ${cart[id]} = ₹${p.price * cart[id]}\n`;
+            });
+            msg += `\n💰 *Total: ₹${total}*`;
+
+            alert('✅ Order placed successfully!\n\nTotal: ₹' + total + '\n\nWe will confirm via WhatsApp/call shortly.');
+            closeCheckout();
+            cart = {};
+            renderProducts('all');
+            updateCartUI();
+        }
+
+        // Initial render
+        renderProducts('all');
+    </script>
 </body>
 </html>

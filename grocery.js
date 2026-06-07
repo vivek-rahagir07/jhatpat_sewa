@@ -199,7 +199,27 @@ function closeGroceryCheckout() {
 
 function placeGroceryOrder(e) {
     e.preventDefault();
-    const { total } = getCartStats();
+    const { ids, total } = getCartStats();
+    const name = document.getElementById('grocery-name').value.trim();
+    const phone = document.getElementById('grocery-phone').value.trim();
+    const address = document.getElementById('grocery-address').value.trim();
+    const items = ids.map(id => {
+        const p = GROCERY_PRODUCTS.find(x => x.id == id);
+        return `${p.emoji} ${p.name} × ${groceryCart[id]}`;
+    });
+
+    if (window.RequestsStore) {
+        RequestsStore.addServiceRequest({
+            type: 'grocery',
+            serviceName: 'Grocery Delivery',
+            customerName: name,
+            phone,
+            address,
+            amount: total,
+            items
+        });
+    }
+
     closeGroceryCheckout();
     document.getElementById('orderSuccessOverlay').classList.add('open');
     document.getElementById('successOrderTotal').textContent = '₹' + total;

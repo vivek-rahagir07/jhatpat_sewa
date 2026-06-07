@@ -67,9 +67,28 @@ function showCyberDocs(val) {
 
 function submitCyberRequest(e) {
     e.preventDefault();
+    const name = document.getElementById('cyber-name').value.trim();
+    const phone = document.getElementById('cyber-phone').value.trim();
+    const address = document.getElementById('cyber-address').value.trim();
+    const requirements = document.getElementById('cyber-requirements').value.trim();
+    const serviceId = document.getElementById('cyberServiceSelect').value;
+    const service = CYBER_SERVICES.find(s => s.id === serviceId) || selectedService;
+
+    if (window.RequestsStore) {
+        RequestsStore.addServiceRequest({
+            type: 'cyber',
+            serviceName: service?.name || 'Cyber Cafe Service',
+            customerName: name,
+            phone,
+            address,
+            amount: parseInt(service?.price?.replace(/\D/g, '') || '0', 10) || 0,
+            details: requirements
+        });
+    }
+
     closeCyberBooking();
     document.getElementById('cyberSuccessOverlay').classList.add('open');
-    document.getElementById('cyberSuccessService').textContent = selectedService?.name || 'Service';
+    document.getElementById('cyberSuccessService').textContent = service?.name || 'Service';
 }
 
 function closeCyberSuccess() {

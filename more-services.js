@@ -95,9 +95,28 @@ function showMoreDocs(val) {
 
 function submitMoreRequest(e) {
     e.preventDefault();
+    const name = document.getElementById('more-name').value.trim();
+    const phone = document.getElementById('more-phone').value.trim();
+    const address = document.getElementById('more-address').value.trim();
+    const details = document.getElementById('more-details').value.trim();
+    const serviceId = document.getElementById('moreServiceSelect').value;
+    const service = MORE_SERVICES.find(s => s.id === serviceId) || selectedMoreService;
+
+    if (window.RequestsStore) {
+        RequestsStore.addServiceRequest({
+            type: 'more',
+            serviceName: service?.name || 'Custom Service',
+            customerName: name,
+            phone,
+            address,
+            amount: parseInt(service?.price?.replace(/\D/g, '') || '0', 10) || 0,
+            details
+        });
+    }
+
     closeMoreBooking();
     document.getElementById('moreSuccessOverlay').classList.add('open');
-    document.getElementById('moreSuccessService').textContent = selectedMoreService?.name || 'Service';
+    document.getElementById('moreSuccessService').textContent = service?.name || 'Service';
 }
 
 function closeMoreSuccess() {

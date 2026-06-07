@@ -90,11 +90,11 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Your Name</label>
-                        <input type="text" class="form-control" placeholder="Full name" required>
+                        <input type="text" id="cyber-name" class="form-control" placeholder="Full name" required>
                     </div>
                     <div class="form-group">
                         <label>Phone</label>
-                        <input type="tel" class="form-control" placeholder="+91 9996445592" required>
+                        <input type="tel" id="cyber-phone" class="form-control" placeholder="+91 9996445592" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -112,8 +112,12 @@
                     <ul id="cyberDocList"></ul>
                 </div>
                 <div class="form-group">
+                    <label>Address / Pickup Location</label>
+                    <textarea id="cyber-address" class="form-control" placeholder="Your full address for document pickup..." style="min-height:60px;" required></textarea>
+                </div>
+                <div class="form-group">
                     <label>Requirements</label>
-                    <textarea class="form-control" placeholder="Copies, paper size, specific details..."></textarea>
+                    <textarea id="cyber-requirements" class="form-control" placeholder="Copies, paper size, specific details..."></textarea>
                 </div>
                 <div class="form-group">
                     <label>Upload Documents</label>
@@ -140,6 +144,7 @@
         <p>&copy; 2026 Jhatpat Sewa | Fast - Easy - Reliable Service</p>
     </footer>
     <script src="script.js"></script>
+    <script src="requests-store.js"></script>
     <script src="cyber-cafe.js"></script>
 </body>
 </html>

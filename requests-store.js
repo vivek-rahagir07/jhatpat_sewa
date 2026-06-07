@@ -32,16 +32,10 @@ function saveRequests(requests) {
 
 function resolveLocation(address = '') {
     const lower = address.toLowerCase();
-    for (const [key, coords] of Object.entries(AREA_COORDS)) {
-        if (key !== 'default' && lower.includes(key.replace('hsr', 'hsr'))) {
-            return jitterCoords(coords);
-        }
-        if (key !== 'default' && lower.includes(coords.label.toLowerCase())) {
-            return jitterCoords(coords);
-        }
+    const keywords = ['koramangala', 'indiranagar', 'whitefield', 'jayanagar', 'hsr', 'marathahalli', 'btm'];
+    for (const key of keywords) {
+        if (lower.includes(key)) return jitterCoords(AREA_COORDS[key]);
     }
-    if (lower.includes('hsr')) return jitterCoords(AREA_COORDS.hsr);
-    if (lower.includes('btm')) return jitterCoords(AREA_COORDS.btm);
     return jitterCoords(AREA_COORDS.default);
 }
 

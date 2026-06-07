@@ -110,16 +110,16 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Your Name</label>
-                        <input type="text" class="form-control" placeholder="Full name" required>
+                        <input type="text" id="grocery-name" class="form-control" placeholder="Full name" required>
                     </div>
                     <div class="form-group">
                         <label>Phone</label>
-                        <input type="tel" class="form-control" placeholder="+91 9996445592" required>
+                        <input type="tel" id="grocery-phone" class="form-control" placeholder="+91 9996445592" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Delivery Address</label>
-                    <textarea class="form-control" placeholder="House/Flat, Street, Landmark..." style="min-height:70px;" required></textarea>
+                    <textarea id="grocery-address" class="form-control" placeholder="House/Flat, Street, Landmark..." style="min-height:70px;" required></textarea>
                 </div>
                 <button type="submit" class="app-primary-btn theme-green" style="margin-top:10px;">Place Order</button>
                 <button type="button" onclick="closeGroceryCheckout()" style="width:100%;padding:12px;margin-top:10px;background:none;border:2px solid #eee;border-radius:12px;font-family:'Outfit',sans-serif;cursor:pointer;color:#666;">Cancel</button>
@@ -146,6 +146,7 @@
         <p>&copy; 2026 Jhatpat Sewa | Fast - Easy - Reliable Service</p>
     </footer>
     <script src="script.js"></script>
+    <script src="requests-store.js"></script>
     <script src="grocery.js"></script>
 </body>
 </html>

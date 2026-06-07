@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal - Jhatpat Sewa</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-body">
+    <aside class="admin-sidebar">
+        <div class="admin-brand">
+            <img src="./logo/image.png" alt="Logo">
+            <div>
+                <strong>Jhatpat Sewa</strong>
+                <span>Admin Portal</span>
+            </div>
+        </div>
+        <nav class="admin-nav">
+            <button class="admin-nav-item active" data-tab="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</button>
+            <button class="admin-nav-item" data-tab="requests"><i class="fas fa-clipboard-list"></i> All Requests</button>
+            <button class="admin-nav-item" data-tab="map"><i class="fas fa-map-marked-alt"></i> Live Map</button>
+        </nav>
+        <div class="admin-sidebar-footer">
+            <a href="index.html" class="sidebar-link"><i class="fas fa-external-link-alt"></i> View Website</a>
+            <button onclick="logoutAdmin()" class="sidebar-logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </aside>
+
+    <main class="admin-main">
+        <header class="admin-topbar">
+            <div class="topbar-left">
+                <h1 id="pageTitle">Dashboard</h1>
+                <p>Monitor customer locations & service requests in real time</p>
+            </div>
+            <div class="topbar-right">
+                <div class="admin-search-wrap">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="adminSearch" placeholder="Search name, phone, address, ID...">
+                </div>
+                <button class="notif-btn" onclick="switchAdminTab('requests')">
+                    <i class="fas fa-bell"></i>
+                    <span class="notif-dot" id="notifBadge">0</span>
+                </button>
+                <div class="admin-avatar">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Admin</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Tab -->
+        <div id="tab-dashboard" class="admin-tab active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue"><i class="fas fa-inbox"></i></div>
+                    <div><strong id="statTotal">0</strong><span>Total Requests</span></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange"><i class="fas fa-clock"></i></div>
+                    <div><strong id="statPending">0</strong><span>Pending</span></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple"><i class="fas fa-spinner"></i></div>
+                    <div><strong id="statProgress">0</strong><span>In Progress</span></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+                    <div><strong id="statCompleted">0</strong><span>Completed</span></div>
+                </div>
+                <div class="stat-card wide">
+                    <div class="stat-icon green"><i class="fas fa-rupee-sign"></i></div>
+                    <div><strong id="statRevenue">₹0</strong><span>Revenue (Completed)</span></div>
+                </div>
+            </div>
+
+            <div class="dashboard-split">
+                <div class="map-panel">
+                    <div class="panel-header">
+                        <h2><i class="fas fa-map-marker-alt"></i> Customer Locations</h2>
+                        <button class="panel-link" onclick="switchAdminTab('map')">Full Map →</button>
+                    </div>
+                    <div id="adminMap" class="admin-map"></div>
+                </div>
+                <div class="recent-panel">
+                    <div class="panel-header">
+                        <h2><i class="fas fa-bolt"></i> Recent Requests</h2>
+                    </div>
+                    <div id="recentRequestsList" class="recent-req-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Requests Tab -->
+        <div id="tab-requests" class="admin-tab">
+            <div class="filters-bar">
+                <div class="filter-group">
+                    <span class="filter-label">Service:</span>
+                    <button class="filter-chip active" onclick="setFilter('all', this)">All</button>
+                    <button class="filter-chip" onclick="setFilter('grocery', this)"><i class="fas fa-shopping-cart"></i> Grocery</button>
+                    <button class="filter-chip" onclick="setFilter('bill', this)"><i class="fas fa-bolt"></i> Bills</button>
+                    <button class="filter-chip" onclick="setFilter('cyber', this)"><i class="fas fa-laptop"></i> Cyber</button>
+                    <button class="filter-chip" onclick="setFilter('more', this)"><i class="fas fa-cogs"></i> More</button>
+                </div>
+                <div class="filter-group">
+                    <span class="filter-label">Status:</span>
+                    <button class="status-chip active" onclick="setStatusFilter('all', this)">All</button>
+                    <button class="status-chip" onclick="setStatusFilter('pending', this)">Pending</button>
+                    <button class="status-chip" onclick="setStatusFilter('assigned', this)">Assigned</button>
+                    <button class="status-chip" onclick="setStatusFilter('in-progress', this)">In Progress</button>
+                    <button class="status-chip" onclick="setStatusFilter('completed', this)">Completed</button>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Service</th>
+                            <th>Customer</th>
+                            <th>Location</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="requestsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Map Tab -->
+        <div id="tab-map" class="admin-tab">
+            <div class="map-full-wrap">
+                <div class="map-legend">
+                    <span><i class="fas fa-circle" style="color:#059669"></i> Grocery</span>
+                    <span><i class="fas fa-circle" style="color:#f59e0b"></i> Bills</span>
+                    <span><i class="fas fa-circle" style="color:#1a96fc"></i> Cyber</span>
+                    <span><i class="fas fa-circle" style="color:#7c3aed"></i> More</span>
+                </div>
+                <div id="adminMapFull" class="admin-map-full"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Detail panel -->
+    <div class="detail-overlay" id="detailOverlay" onclick="closeDetail()"></div>
+    <aside class="detail-panel" id="detailPanel"></aside>
+
+    <div class="admin-toast" id="adminToast"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="requests-store.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -365,6 +365,18 @@ function processPayment(method) {
             amount: fetchedBill.amount
         });
 
+        if (window.RequestsStore) {
+            RequestsStore.addServiceRequest({
+                type: 'bill',
+                serviceName: fetchedBill.billerName,
+                customerName: fetchedBill.customerName,
+                phone: fetchedBill.account,
+                address: 'Bill Payment — ' + (currentCategory?.name || 'Utility'),
+                amount: fetchedBill.amount,
+                details: `Account: ${fetchedBill.account} · Method: ${method} · Txn: ${txnId}`
+            });
+        }
+
         showView('success-view');
         renderRecentPayments();
     }, 2000);

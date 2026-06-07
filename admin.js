@@ -115,17 +115,28 @@ function renderRecentList() {
     }).join('');
 }
 
-function initMap() {
-    if (adminMap) return;
-    const mapEl = document.getElementById('adminMap');
-    if (!mapEl || typeof L === 'undefined') return;
+let mapContainerId = 'adminMap';
 
-    adminMap = L.map('adminMap', { zoomControl: true }).setView([12.9716, 77.5946], 12);
+function initMap(containerId) {
+    if (typeof L === 'undefined') return;
+    const id = containerId || mapContainerId;
+    const mapEl = document.getElementById(id);
+    if (!mapEl) return;
+
+    if (adminMap) {
+        adminMap.remove();
+        adminMap = null;
+        mapMarkers = [];
+    }
+
+    mapContainerId = id;
+    mapEl.innerHTML = '';
+    adminMap = L.map(id, { zoomControl: true }).setView([12.9716, 77.5946], 12);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap'
     }).addTo(adminMap);
 
-    setTimeout(() => adminMap.invalidateSize(), 300);
+    setTimeout(() => adminMap?.invalidateSize(), 300);
 }
 
 function updateMapMarkers() {
@@ -271,13 +282,16 @@ function switchAdminTab(tab) {
     document.querySelectorAll('.admin-nav-item').forEach(n => n.classList.toggle('active', n.dataset.tab === tab));
     document.querySelectorAll('.admin-tab').forEach(t => t.classList.toggle('active', t.id === 'tab-' + tab));
 
-    if (tab === 'map') {
-        setTimeout(() => {
-            initMap();
-            updateMapMarkers();
-            adminMap?.invalidateSize();
-        }, 100);
-    }
+    const titles = { dashboard: 'Dashboard', requests: 'All Requests', map: 'Live Map' };
+    const titleEl = document.getElementById('pageTitle');
+    if (titleEl) titleEl.textContent = titles[tab] || 'Dashboard';
+
+    const mapId = tab === 'map' ? 'adminMapFull' : 'adminMap';
+    setTimeout(() => {
+        initMap(mapId);
+        updateMapMarkers();
+        adminMap?.invalidateSize();
+    }, tab === 'map' ? 200 : 100);
 }
 
 function refreshDashboard() {

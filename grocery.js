@@ -183,6 +183,18 @@ function toggleGroceryCart() {
 }
 
 function openGroceryCheckout() {
+    if (typeof UserStore !== 'undefined') {
+        if (!UserStore.getSessionUser()) {
+            showGroceryToast('Please login to checkout');
+            setTimeout(() => { window.location.href = 'login.html'; }, 1200);
+            return;
+        }
+        if (!UserStore.isProfileComplete(UserStore.getUserProfile())) {
+            showGroceryToast('Complete your profile first');
+            setTimeout(() => { window.location.href = 'onboarding.html'; }, 1200);
+            return;
+        }
+    }
     toggleGroceryCart();
     const { ids, total } = getCartStats();
     const summary = document.getElementById('checkoutSummary');
@@ -190,7 +202,29 @@ function openGroceryCheckout() {
         const p = GROCERY_PRODUCTS.find(x => x.id == id);
         return `<div class="preview-row"><span>${p.emoji} ${p.name} × ${groceryCart[id]}</span><strong>₹${p.price * groceryCart[id]}</strong></div>`;
     }).join('') + `<div class="preview-amount-row"><span>Total</span><strong class="preview-amount">₹${total}</strong></div>`;
+    prefillGroceryCheckout();
     document.getElementById('checkoutSheet').classList.add('open');
+}
+
+function prefillGroceryCheckout() {
+    if (typeof UserStore === 'undefined') return;
+    const p = UserStore.getUserProfile();
+    if (!p) return;
+    if (p.fullName) document.getElementById('grocery-name').value = p.fullName;
+    if (p.phone) document.getElementById('grocery-phone').value = p.phone;
+    const addr = UserStore.getFormattedAddress();
+    if (addr) document.getElementById('grocery-address').value = addr;
+}
+
+function updateGroceryLocationLabel() {
+    const btn = document.querySelector('.app-location-btn');
+    if (!btn || typeof UserStore === 'undefined') return;
+    const p = UserStore.getUserProfile();
+    if (p && UserStore.isProfileComplete(p)) {
+        const short = p.flatNo || p.address?.split(',')[0] || 'Home';
+        btn.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${short} <i class="fas fa-chevron-down"></i>`;
+        btn.onclick = () => { window.location.href = 'onboarding.html'; };
+    }
 }
 
 function closeGroceryCheckout() {
@@ -209,6 +243,7 @@ function placeGroceryOrder(e) {
     });
 
     if (window.RequestsStore) {
+        const profile = typeof UserStore !== 'undefined' ? UserStore.getUserProfile() : null;
         RequestsStore.addServiceRequest({
             type: 'grocery',
             serviceName: 'Grocery Delivery',
@@ -216,7 +251,8 @@ function placeGroceryOrder(e) {
             phone,
             address,
             amount: total,
-            items
+            items,
+            location: profile?.location || undefined
         });
     }
 
@@ -242,6 +278,7 @@ function showGroceryToast(msg) {
 document.addEventListener('DOMContentLoaded', () => {
     renderCategoryChips();
     renderProducts();
+    updateGroceryLocationLabel();
 
     document.getElementById('grocerySearch').addEventListener('input', e => {
         searchQuery = e.target.value;

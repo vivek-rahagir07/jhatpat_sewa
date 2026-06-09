@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Jhatpat Sewa</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="app-shell-body">
+    <div class="app-shell">
+        <!-- Blinkit-style header -->
+        <header class="dash-header">
+            <div class="dash-location" onclick="window.location.href='onboarding.html'">
+                <div class="dash-location-label">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Deliver to</span>
+                </div>
+                <div class="dash-location-addr" id="dashAddress">Loading...</div>
+            </div>
+            <div class="dash-header-actions">
+                <a href="onboarding.html" class="dash-icon-btn" title="Edit profile"><i class="fas fa-user-edit"></i></a>
+                <button class="dash-icon-btn" onclick="logoutUser()" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
+        </header>
+
+        <div class="dash-greeting" id="dashGreeting">Good morning!</div>
+
+        <div class="dash-search" onclick="window.location.href='grocery.html'">
+            <i class="fas fa-search"></i>
+            <span>Search groceries, bills, services...</span>
+        </div>
+
+        <!-- Promo carousel -->
+        <div class="dash-promo-scroll">
+            <div class="dash-promo dash-promo--green">
+                <div>
+                    <strong>10 min delivery</strong>
+                    <p>Groceries at your door, Zepto-fast</p>
+                </div>
+                <span class="dash-promo-emoji">🛒</span>
+            </div>
+            <div class="dash-promo dash-promo--blue">
+                <div>
+                    <strong>Zero hassle bills</strong>
+                    <p>Pay electricity, mobile & more</p>
+                </div>
+                <span class="dash-promo-emoji">⚡</span>
+            </div>
+            <div class="dash-promo dash-promo--purple">
+                <div>
+                    <strong>Doorstep pickup</strong>
+                    <p>PAN, printing & cyber cafe</p>
+                </div>
+                <span class="dash-promo-emoji">💻</span>
+            </div>
+        </div>
+
+        <!-- Quick services grid -->
+        <section class="dash-section">
+            <h2 class="dash-section-title">What do you need?</h2>
+            <div class="dash-service-grid">
+                <a href="grocery.html" class="dash-svc-card dash-svc--green">
+                    <div class="dash-svc-icon"><i class="fas fa-shopping-basket"></i></div>
+                    <strong>Grocery</strong>
+                    <span>10 min</span>
+                </a>
+                <a href="bill-payment.html" class="dash-svc-card dash-svc--yellow">
+                    <div class="dash-svc-icon"><i class="fas fa-bolt"></i></div>
+                    <strong>Bills</strong>
+                    <span>Instant</span>
+                </a>
+                <a href="cyber-cafe.html" class="dash-svc-card dash-svc--blue">
+                    <div class="dash-svc-icon"><i class="fas fa-laptop"></i></div>
+                    <strong>Cyber Cafe</strong>
+                    <span>Pickup</span>
+                </a>
+                <a href="more-services.html" class="dash-svc-card dash-svc--purple">
+                    <div class="dash-svc-icon"><i class="fas fa-tools"></i></div>
+                    <strong>More</strong>
+                    <span>Explore</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Recent orders -->
+        <section class="dash-section">
+            <div class="dash-section-head">
+                <h2 class="dash-section-title">Your orders</h2>
+                <span class="dash-badge" id="orderCount">0 active</span>
+            </div>
+            <div class="dash-orders" id="dashOrders">
+                <div class="dash-empty-orders">
+                    <i class="fas fa-box-open"></i>
+                    <p>No orders yet — try grocery delivery!</p>
+                    <a href="grocery.html" class="app-primary-btn theme-green" style="max-width:200px;margin:12px auto 0;">Shop now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile card -->
+        <section class="dash-section">
+            <div class="dash-profile-card" id="dashProfileCard">
+                <img id="dashAvatar" class="dash-avatar" alt="" src="">
+                <div class="dash-profile-info">
+                    <strong id="dashName">—</strong>
+                    <span id="dashPhone">—</span>
+                    <span class="dash-verified"><i class="fas fa-shield-alt"></i> Verified</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Bottom nav (app-style) -->
+    <nav class="app-bottom-nav">
+        <a href="dashboard.html" class="bottom-nav-item active">
+            <i class="fas fa-home"></i><span>Home</span>
+        </a>
+        <a href="grocery.html" class="bottom-nav-item">
+            <i class="fas fa-shopping-cart"></i><span>Grocery</span>
+        </a>
+        <a href="bill-payment.html" class="bottom-nav-item">
+            <i class="fas fa-receipt"></i><span>Bills</span>
+        </a>
+        <a href="onboarding.html" class="bottom-nav-item">
+            <i class="fas fa-user"></i><span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="user-store.js"></script>
+    <script src="requests-store.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

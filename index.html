@@ -31,7 +31,7 @@
                 </li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="login.html" class="login-btn">Login</a></li>
+                <li class="nav-auth-slot"><a href="login.html" class="login-btn">Login</a></li>
             </ul>
             <div class="hamburger">
                 <i class="fas fa-bars"></i>
@@ -42,15 +42,20 @@
     <!-- Main Content Area with Light Blue Background -->
     <div class="main-bg">
         <!-- Hero Section -->
-        <section id="home" class="hero fade-in">
+        <section id="home" class="hero hero-enhanced fade-in">
             <div class="hero-logo-container">
                 <img src="./logo/image.png" alt="Jhatpat Sewa Logo" class="hero-logo">
             </div>
             <h1>Fast & Easy Services at Your Doorstep</h1>
-            <p>One place for all your daily needs</p>
+            <p>Groceries in 10 mins · Bills in seconds · Doorstep pickup — like Blinkit, Zepto & PhonePe combined</p>
+            <div class="hero-stats">
+                <span class="hero-stat-pill"><i class="fas fa-bolt"></i> 10 min delivery</span>
+                <span class="hero-stat-pill"><i class="fas fa-shield-alt"></i> Verified partners</span>
+                <span class="hero-stat-pill"><i class="fas fa-map-marker-alt"></i> Live tracking</span>
+            </div>
             <div class="hero-buttons">
-                <a href="#services" class="btn btn-primary">Explore Services</a>
-                <a href="#contact" class="btn btn-secondary">Contact Us</a>
+                <a href="login.html" class="btn btn-primary hero-app-cta"><i class="fas fa-mobile-alt"></i> Get the App Experience</a>
+                <a href="#services" class="btn btn-secondary">Explore Services</a>
             </div>
         </section>
 
@@ -188,6 +193,8 @@
         <p>&copy; 2026 Jhatpat Sewa | Fast - Easy - Reliable Service</p>
     </footer>
 
+    <script src="user-store.js"></script>
+    <script src="auth.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

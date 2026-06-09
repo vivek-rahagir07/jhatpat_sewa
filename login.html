@@ -7,66 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { background-color: #f4f7f6; }
-        .login-page {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: calc(100vh - 70px);
-            padding: 40px 20px;
-        }
-        .login-card {
-            display: flex;
-            background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            overflow: hidden;
-            max-width: 900px;
-            width: 100%;
-        }
-        .login-image {
-            flex: 1;
-            background: linear-gradient(135deg, #1a96fc 0%, #6c63ff 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
-        .login-image h2 { font-size: 32px; margin-bottom: 15px; }
-        .login-image p { font-size: 16px; opacity: 0.9; }
-        .login-form-container {
-            flex: 1;
-            padding: 60px 50px;
-        }
-        .login-form-container h2 { font-size: 28px; color: #333; margin-bottom: 30px; }
-        .form-group { margin-bottom: 20px; position: relative; }
-        .form-group i { position: absolute; left: 15px; top: 15px; color: #999; }
-        .form-group input { 
-            width: 100%; padding: 12px 15px 12px 45px; 
-            border: 1px solid #ddd; border-radius: 8px; font-size: 15px;
-            transition: all 0.3s;
-        }
-        .form-group input:focus { border-color: #1a96fc; box-shadow: 0 0 0 3px rgba(26,150,252,0.1); outline: none; }
-        .forgot-password { display: block; text-align: right; font-size: 13px; color: #1a96fc; margin-bottom: 20px; }
-        .login-btn-full { width: 100%; padding: 14px; background: #1a96fc; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .login-btn-full:hover { background: #0d8dfb; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(26,150,252,0.3); }
-        .social-login { display: flex; gap: 15px; margin-top: 25px; }
-        .social-btn { flex: 1; display: flex; justify-content: center; align-items: center; gap: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-weight: 600; color: #555; background: #fff; cursor: pointer; transition: 0.3s; }
-        .social-btn:hover { background: #f9f9f9; }
-        .divider-text { text-align: center; margin: 25px 0; color: #888; position: relative; }
-        .divider-text::before, .divider-text::after { content: ''; position: absolute; top: 50%; width: 45%; height: 1px; background: #ddd; }
-        .divider-text::before { left: 0; }
-        .divider-text::after { right: 0; }
-        
-        @media (max-width: 768px) {
-            .login-card { flex-direction: column; }
-            .login-image { padding: 40px 20px; }
-        }
-    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -88,19 +28,30 @@
                 </li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="login.html" class="login-btn">Login</a></li>
+                <li class="nav-auth-slot"><a href="login.html" class="login-btn">Login</a></li>
             </ul>
+            <div class="hamburger"><i class="fas fa-bars"></i></div>
         </div>
     </nav>
 
     <div class="login-page fade-in">
         <div class="login-card">
             <div class="login-image">
-                <h2>Welcome Back!</h2>
-                <p>Log in to access your dashboard, track your orders, and enjoy our premium services.</p>
+                <div class="login-image-badge"><i class="fas fa-bolt"></i> 10 min delivery</div>
+                <h2>Welcome to Jhatpat Sewa</h2>
+                <p>Sign in to order groceries, pay bills & book doorstep services — Blinkit-fast, all in one app.</p>
+                <ul class="login-perks">
+                    <li><i class="fas fa-check-circle"></i> Track orders live</li>
+                    <li><i class="fas fa-check-circle"></i> Saved address & ID</li>
+                    <li><i class="fas fa-check-circle"></i> One-tap reorder</li>
+                </ul>
             </div>
             <div class="login-form-container">
-                <h2>Sign In</h2>
+                <div class="login-tabs">
+                    <button type="button" class="login-tab active" id="tabSignIn" onclick="switchLoginTab('signin')">Sign In</button>
+                    <button type="button" class="login-tab" id="tabSignUp" onclick="switchLoginTab('signup')">Sign Up</button>
+                </div>
+                <h2 id="loginHeading">Sign In</h2>
                 <form id="loginForm" onsubmit="handleLogin(event)">
                     <div class="form-group">
                         <i class="fas fa-envelope"></i>
@@ -108,33 +59,93 @@
                     </div>
                     <div class="form-group">
                         <i class="fas fa-lock"></i>
-                        <input type="password" id="loginPassword" placeholder="Password" required>
+                        <input type="password" id="loginPassword" placeholder="Password" required minlength="6">
                     </div>
-                    <a href="#" class="forgot-password">Forgot Password?</a>
-                    <button type="submit" class="login-btn-full">Login to Account</button>
-                    <p style="font-size:12px;color:#888;margin-top:12px;text-align:center;">Admin? Use <strong>admin@jhatpat.com</strong> / <strong>admin123</strong></p>
-                    
+                    <a href="#" class="forgot-password" onclick="showForgotHint(event)">Forgot Password?</a>
+                    <button type="submit" class="login-btn-full" id="loginSubmitBtn">Continue</button>
+                    <p class="login-hint" id="adminHint">Admin? Use <strong>admin@jhatpat.com</strong> / <strong>admin123</strong></p>
+
                     <div class="divider-text">OR</div>
-                    
+
                     <div class="social-login">
-                        <button type="button" class="social-btn"><i class="fab fa-google" style="color:#db4437"></i> Google</button>
-                        <button type="button" class="social-btn"><i class="fab fa-facebook" style="color:#4267B2"></i> Facebook</button>
+                        <button type="button" class="social-btn" onclick="socialLogin('google')"><i class="fab fa-google" style="color:#db4437"></i> Google</button>
+                        <button type="button" class="social-btn" onclick="socialLogin('phone')"><i class="fas fa-mobile-alt" style="color:#25d366"></i> Phone</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <div class="app-toast" id="loginToast"></div>
+
+    <script src="user-store.js"></script>
+    <script src="script.js"></script>
     <script>
+        let loginMode = 'signin';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (UserStore.getSessionUser()) {
+                const complete = UserStore.isProfileComplete(UserStore.getUserProfile());
+                window.location.href = complete ? 'dashboard.html' : 'onboarding.html';
+            }
+        });
+
+        function switchLoginTab(mode) {
+            loginMode = mode;
+            document.getElementById('tabSignIn').classList.toggle('active', mode === 'signin');
+            document.getElementById('tabSignUp').classList.toggle('active', mode === 'signup');
+            document.getElementById('loginHeading').textContent = mode === 'signin' ? 'Sign In' : 'Create Account';
+            document.getElementById('loginSubmitBtn').textContent = mode === 'signin' ? 'Continue' : 'Sign Up & Continue';
+            document.getElementById('adminHint').style.display = mode === 'signin' ? 'block' : 'none';
+        }
+
         function handleLogin(e) {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value.trim().toLowerCase();
             const password = document.getElementById('loginPassword').value;
+
             if (email === 'admin@jhatpat.com' && password === 'admin123') {
                 sessionStorage.setItem('jhatpat_admin', 'true');
                 window.location.href = 'admin.html';
-            } else {
-                alert('Login successful! (Customer dashboard coming soon)');
+                return;
             }
+
+            const users = JSON.parse(localStorage.getItem('jhatpat_registered_users') || '{}');
+            if (loginMode === 'signin' && !users[email]) {
+                showLoginToast('No account found. Please sign up first.');
+                switchLoginTab('signup');
+                return;
+            }
+
+            const result = UserStore.loginCustomer(email, password);
+            if (!result.ok) {
+                showLoginToast(result.error);
+                return;
+            }
+
+            showLoginToast(loginMode === 'signup' ? 'Account created! Complete your profile…' : 'Welcome back!');
+            setTimeout(() => {
+                window.location.href = result.needsOnboarding ? 'onboarding.html' : 'dashboard.html';
+            }, 500);
+        }
+
+        function socialLogin(type) {
+            const demoEmail = type === 'google' ? 'user@gmail.com' : 'user@phone.com';
+            document.getElementById('loginEmail').value = demoEmail;
+            document.getElementById('loginPassword').value = 'demo123';
+            showLoginToast('Demo login — tap Continue');
+        }
+
+        function showForgotHint(e) {
+            e.preventDefault();
+            showLoginToast('Contact support@jhatpat.com to reset password');
+        }
+
+        function showLoginToast(msg) {
+            const t = document.getElementById('loginToast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
         }
     </script>
 </body>
